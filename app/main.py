@@ -3,11 +3,12 @@ from fastapi import FastAPI, HTTPException, status, Response, Request
 from app.routers import user
 from app.db.database import engine
 from app import models
-from app.routers import user, authentication
+from app.routers import user, authentication, water_bill
 
 app = FastAPI()
 app.include_router(user.router)
 app.include_router(authentication.router)
+app.include_router(water_bill.router)
 
 @app.get('/')
 def index():

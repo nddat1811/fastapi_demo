@@ -1,21 +1,16 @@
 from datetime import date
 from pydantic import BaseModel, EmailStr
+from app.utils.constants import Role
 
 class UserBase(BaseModel):
     username : str
     email : EmailStr
     dob : date
 
-class RegistrationRequest(UserBase): 
-    username : str
-    password : str
-    email : EmailStr
-    dob : date
+class UserDisplay(UserBase):
+    id : int
+    role : Role
 
-class EmailResetPasswordRequest(BaseModel):
-    email: str
-class OTPResetPasswordRequest(BaseModel):
-    otp: str
 class UserResetPasswordRequest(BaseModel):
     new_pass: str
     conf_pass: str
@@ -26,3 +21,18 @@ class ResetPasswordResponse(BaseModel):
     username: str
     email: str
     dob: date
+
+class UpdateUserRequest(BaseModel):
+    id : int
+    role : Role
+    dob : date
+
+class UpdateRoleRequest(BaseModel):
+    id : int
+    role : Role
+
+class ForgotPasswordRequest(BaseModel):
+    email: str
+
+class CheckCodePasswordRequest(BaseModel):
+    code: str

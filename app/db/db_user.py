@@ -3,10 +3,11 @@ from fastapi import HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from app.schemas.authentication import AuthResponse, RegistrationRequest
+from app.schemas.user import UpdateUserRequest
 from app.utils.constants import Role
 from . import hash, oauth2
 from datetime import timedelta, datetime
-from app.models import DbUser
+from app.models import DbUser, user
 
 async def create_new_user(registration_request : RegistrationRequest, db : Session):
 
@@ -87,7 +88,7 @@ async def refresh_token(token : str, db: Session):
     
 
 async def get_user_by_username(username : str, db: Session):
-    user = db.query(DbUser).filter(DbUser.username == username).first()
+    user = db.query(DbUser).filter(DbUser.username == username, DbUser.deleted_at != None).first()
     return user
 
 async def get_user_by_email(db: Session, email: str):
@@ -102,9 +103,25 @@ async def get_user_by_id(db: Session, id: int):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with email: {id} not found")
     return user
 
+async def update_user(user_update_request : UpdateUserRequest,  db : Session):
+    user = await get_user_by_id(db, user_update_request.id)
+    user.role = user_update_request.role
+    user.dob = user_update_request.dob
+    db.commit()
+    return user
+
+async def delete_user(id : int, db : Session):
+    user = await get_user_by_id(db, id)
+    user.deleted_at = datetime.now()
+    db.commit()
+
+    return {
+        "message" : f"Delete user {id} successfully"
+    }
+
 
 # Save OTP into reset password database
-async def save_otp(db: Session, code: str, user_id: int):
+async def save_code(db: Session, code: str, user_id: int):
     user = await get_user_by_id(db, user_id)
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User with {user_id} not found")
@@ -120,6 +137,9 @@ async def check_otp_password(db: Session, code: str):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User with {code} not found")
     current_time = datetime.now()
     if current_time < user.expiry:
+        user.code = None
+        user.expiry = None
+        db.commit()
         return user
     else:
         raise HTTPException(status_code=status.HTTP_410_GONE, detail=f"The code {code} is not available")

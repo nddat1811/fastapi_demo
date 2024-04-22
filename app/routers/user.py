@@ -1,11 +1,14 @@
-from fastapi import APIRouter, Depends
-from app.schemas.user import EmailResetPasswordRequest, OTPResetPasswordRequest, UserResetPasswordRequest, ResetPasswordResponse
+from typing import List
+from fastapi import APIRouter, Depends, HTTPException, Request, status
+from app.models import user
+from app.models.user import DbUser
+from app.schemas.user import CheckCodePasswordRequest, ForgotPasswordRequest, UpdateRoleRequest, UpdateUserRequest, UserDisplay, UserResetPasswordRequest, ResetPasswordResponse
 from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.db import db_user
 from fastapi.templating import Jinja2Templates
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
-from app.utils.otp import generate_otp
+from app.utils.generate import generate_code
 
 router = APIRouter(
     prefix='/users',
@@ -27,15 +30,39 @@ conf = ConnectionConfig(
 )
 
 
+@router.get('/', response_model = List[UserDisplay])
+async def get_all_users(db : Session = Depends(get_db)):
+    return db.query(DbUser).all()
+
+@router.get('/{id}', response_model = UserDisplay)
+async def get_user_by_id(id : int, db : Session = Depends(get_db)): 
+    return await db_user.get_user_by_id(db, id)
+
+@router.put('/')
+async def update_user(update_user_request: UpdateUserRequest, db : Session = Depends(get_db)):
+    return await db_user.update_user(update_user_request, db)
+
+@router.delete('/{id}')
+async def delete_user( id : int, db : Session = Depends(get_db)):
+    return await db_user.delete_user(id, db)
+
+@router.put('/role', response_model=UserDisplay)
+async def edit_role(update_role_request : UpdateRoleRequest,  db : Session = Depends(get_db)):
+    user = await db_user.get_user_by_id(db, update_role_request.id)
+    user.role = update_role_request.role
+    db.commit()
+    return user
+
+
 # Forgot password
 @router.post('/forgot-password', response_model= ResetPasswordResponse)
-async def forgot_password(req_email: EmailResetPasswordRequest = None, db: Session = Depends(get_db)):
-    user =  await db_user.get_user_by_email(db, req_email.email) # find the user with the gmail
+async def forgot_password(req: ForgotPasswordRequest = None, db: Session = Depends(get_db)):
+    user =  await db_user.get_user_by_email(db, req.email) # find the user with the gmail
     if user is None:
         return user
-    # Generate code otp (string: 6 digits random)
-    code = generate_otp()
-    user_reset_password = await db_user.save_otp(db, code, user.id) 
+    # Generate code code (string: 6 digits random)
+    code = generate_code()
+    user_reset_password = await db_user.save_code(db, code, user.id) 
     if user_reset_password is None:
         return user_reset_password
 
@@ -44,11 +71,11 @@ async def forgot_password(req_email: EmailResetPasswordRequest = None, db: Sessi
     # Pass variable for template
     context = {"user": user, "code": code}
     # Render template from file and return HTML
-    html = templates.TemplateResponse(template_file, {"request": req_email, **context})
+    html = templates.TemplateResponse(template_file, {"request": req, **context})
 
     message = MessageSchema(
         subject="This mail ",
-        recipients=[req_email.email],
+        recipients=[req.email],
         body=html.body,
         subtype=MessageType.html)
 
@@ -56,9 +83,9 @@ async def forgot_password(req_email: EmailResetPasswordRequest = None, db: Sessi
     await fast_mail.send_message(message)
     return user_reset_password
 
-@router.post('/check-otp-password', response_model= ResetPasswordResponse)
-async def check_otp_password(req_code: OTPResetPasswordRequest, db: Session = Depends(get_db)):
-    user = await db_user.check_otp_password(db, req_code.code)
+@router.post('/check-code-password', response_model= ResetPasswordResponse)
+async def check_code_password(req: CheckCodePasswordRequest, db: Session = Depends(get_db)):
+    user = await db_user.check_code_password(db, req.code)
     return user
 
 @router.post('/reset-password', response_model= ResetPasswordResponse)
