@@ -4,7 +4,6 @@ from typing import Optional
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
-
 from .database import get_db
 from jose import JWTError, jwt
 from app.db import db_user
@@ -22,7 +21,6 @@ credentials_exception = HTTPException(
         detail="invalidate token",
         headers={'WWW-Authorization' : 'Bearer'}
 )
-
 
 #Get current user
 def get_current_user(token : str = Depends(oauth2_bearer), db : Session = Depends(get_db)):

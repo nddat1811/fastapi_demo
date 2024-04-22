@@ -9,8 +9,6 @@ from ..schemas.user import RegistrationRequest, UserBase
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
 from app.utils.otp import generate_otp
 
-
-
 router = APIRouter(
     prefix='/users',
     tags=['User']
@@ -30,14 +28,9 @@ conf = ConnectionConfig(
     VALIDATE_CERTS = True
 )
 
-
 @router.post('/register', response_model = UserBase)
 async def register(registration_request : RegistrationRequest, db : Session = Depends(get_db)):
     return db_user.create_new_user(registration_request, db)
-
-@router.get('/secure')
-def secure(user = Depends(get_current_user)):
-    return "sad"
 
 # Forgot password
 @router.post('/forgot-password')
@@ -70,7 +63,6 @@ async def forgot_password(request: Request, email: str = None, db: Session = Dep
     await fast_mail.send_message(message)
     return user_reset_password
 
-#
 @router.post('/check-otp-password')
 async def check_otp_password(code: str, db: Session = Depends(get_db)):
     user = await db_user.check_otp_password(db, code)
