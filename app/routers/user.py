@@ -1,11 +1,12 @@
+from typing import List
 from fastapi import APIRouter, Depends, HTTPException, Request, status
-from app.schemas.user import UserResetPassword, ResetPasswordResponse
+from app.models import user
+from app.models.user import DbUser
+from app.schemas.user import UpdateRoleRequest, UpdateUserRequest, UserBase, UserDisplay, UserResetPassword, ResetPasswordResponse
 from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.db import db_user
 from fastapi.templating import Jinja2Templates
-from ..schemas.user import UserBase
-from ..schemas.authentication import RegistrationRequest
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
 from app.utils.otp import generate_otp
 
@@ -27,6 +28,30 @@ conf = ConnectionConfig(
     USE_CREDENTIALS = True,
     VALIDATE_CERTS = True
 )
+
+
+@router.get('/', response_model = List[UserDisplay])
+async def get_all_users(db : Session = Depends(get_db)):
+    return db.query(DbUser).all()
+
+@router.get('/{id}', response_model = UserDisplay)
+async def get_user_by_id(id : int, db : Session = Depends(get_db)): 
+    return await db_user.get_user_by_id(db, id)
+
+@router.put('/')
+async def update_user(update_user_request: UpdateUserRequest, db : Session = Depends(get_db)):
+    return await db_user.update_user(update_user_request, db)
+
+@router.delete('/{id}')
+async def delete_user( id : int, db : Session = Depends(get_db)):
+    return await db_user.delete_user(id, db)
+
+@router.put('/role', response_model=UserDisplay)
+async def edit_role(update_role_request : UpdateRoleRequest,  db : Session = Depends(get_db)):
+    user = await db_user.get_user_by_id(db, update_role_request.id)
+    user.role = update_role_request.role
+    db.commit()
+    return user
 
 
 # Forgot password
