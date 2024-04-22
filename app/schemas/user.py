@@ -1,6 +1,6 @@
+
 from datetime import date
 from pydantic import BaseModel, EmailStr
-
 
 class UserBase(BaseModel):
     username : str
@@ -12,3 +12,9 @@ class RegistrationRequest(UserBase):
     password : str
     email : EmailStr
     dob : date
+
+class UserResetPassword(BaseModel):
+    new_pass: str
+    conf_pass: str
+    user_id: int
+

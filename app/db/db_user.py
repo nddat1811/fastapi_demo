@@ -1,15 +1,12 @@
 from datetime import timedelta
 from fastapi import HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
-
 from sqlalchemy.orm import Session
-
-from app.models.user import DbUser
-from app.shemas.authentication import AuthResponse
-from app.shemas.user import RegistrationRequest
-
+from app.schemas.authentication import AuthResponse
+from app.schemas.user import RegistrationRequest
 from . import hash, oauth2
-
+from datetime import timedelta, datetime
+from app.models import DbUser
 
 def create_new_user(registration_request : RegistrationRequest, db : Session):
     user = DbUser(
@@ -76,4 +73,46 @@ def refresh_token(token : str, db: Session):
 
 def get_user_by_username(username : str, db: Session):
     user = db.query(DbUser).filter(DbUser.username == username).first()
+    return user
+
+async def get_user_by_email(db: Session, email: str):
+    user = db.query(DbUser).filter(DbUser.email == email).first()
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with email: {email} not found")
+    return user
+
+async def get_user_by_id(db: Session, id: int):
+    user = db.query(DbUser).filter(DbUser.id == id).first()
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with email: {id} not found")
+    return user
+
+
+# Save OTP into reset password database
+async def save_otp(db: Session, code: str, user_id: int):
+    user = await get_user_by_id(db, user_id)
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User with {user_id} not found")
+    user.code = code
+    user.expiry = datetime.now() + timedelta(minutes=1)
+    db.commit()
+    return user 
+
+# Check if OTP is valid
+async def check_otp_password(db: Session, code: str):
+    user = db.query(DbUser).filter(DbUser.code == code).first()
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User with {code} not found")
+    current_time = datetime.now()
+    if current_time < user.expiry:
+        return user
+    else:
+        return None
+
+async def reset_password(db: Session, password: str, id: int):
+    user = await get_user_by_id(db, id)
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User with {id} not found")
+    user.hashed_password = hash.Hash.bcrypt(password),
+    db.commit()
     return user
