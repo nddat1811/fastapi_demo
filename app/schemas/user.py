@@ -18,3 +18,8 @@ class UserResetPassword(BaseModel):
     conf_pass: str
     user_id: int
 
+class ResetPasswordResponse(BaseModel):
+    id: int
+    username: str
+    email: str
+    dob: date
