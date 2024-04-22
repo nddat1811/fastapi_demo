@@ -4,10 +4,7 @@ from ..schemas.user import UserBase
 from datetime import date
 
 class RegistrationRequest(UserBase): 
-    username : str
     password : str
-    email : EmailStr
-    dob : date
 
 class AuthResponse(BaseModel):
     access_token : str

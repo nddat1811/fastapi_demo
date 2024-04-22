@@ -10,7 +10,7 @@ class DbUser(Base):
     role = Column(String, nullable = False) 
     username = Column(String, unique = True)
     hashed_password = Column(String)
-    email = Column(String)
+    email = Column(String, unique=True)
     dob = Column(Date)
     code = Column(String)
     expiry = Column(DateTime)
