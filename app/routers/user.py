@@ -1,9 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, Request, status
-from app.schemas.user import UserResetPassword, ResetPasswordResponse, RegistrationRequest, UserBase
+from app.schemas.user import UserResetPassword, ResetPasswordResponse
 from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.db import db_user
 from fastapi.templating import Jinja2Templates
+from ..schemas.user import UserBase
+from ..schemas.authentication import RegistrationRequest
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
 from app.utils.otp import generate_otp
 
@@ -26,9 +28,6 @@ conf = ConnectionConfig(
     VALIDATE_CERTS = True
 )
 
-@router.post('/register', response_model = UserBase)
-async def register(registration_request : RegistrationRequest, db : Session = Depends(get_db)):
-    return db_user.create_new_user(registration_request, db)
 
 # Forgot password
 @router.post('/forgot-password', response_model= ResetPasswordResponse)

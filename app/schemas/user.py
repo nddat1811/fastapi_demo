@@ -7,12 +7,6 @@ class UserBase(BaseModel):
     email : EmailStr
     dob : date
 
-class RegistrationRequest(UserBase): 
-    username : str
-    password : str
-    email : EmailStr
-    dob : date
-
 class UserResetPassword(BaseModel):
     new_pass: str
     conf_pass: str

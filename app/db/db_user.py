@@ -2,27 +2,39 @@ from datetime import timedelta
 from fastapi import HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
-from app.schemas.authentication import AuthResponse
-from app.schemas.user import RegistrationRequest
+from app.schemas.authentication import AuthResponse, RegistrationRequest
+from app.utils.constants import Role
 from . import hash, oauth2
 from datetime import timedelta, datetime
 from app.models import DbUser
 
-def create_new_user(registration_request : RegistrationRequest, db : Session):
+async def create_new_user(registration_request : RegistrationRequest, db : Session):
+
+    if await get_user_by_username(registration_request.username, db):
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail='username already existed')
+    
+    if not await is_email_non_exist(registration_request.email, db):
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail='email already existed')
+
     user = DbUser(
         username = registration_request.username,
         hashed_password = hash.Hash.bcrypt(registration_request.password),
         email = registration_request.email,
         dob = registration_request.dob,
-        role = 'user'
+        role = Role.USER
     )
+
     db.add(user)
     db.commit()
     db.refresh(user)
     return user
 
-def login(request : OAuth2PasswordRequestForm, db: Session):
-    user = get_user_by_username(request.username, db)
+async def is_email_non_exist(email: str, db : Session):
+    user = db.query(DbUser).filter(DbUser.email == email).first()
+    return user is None
+
+async def login(request : OAuth2PasswordRequestForm, db: Session):
+    user = await get_user_by_username(request.username, db)
 
     if user is None:
         raise HTTPException(
@@ -35,8 +47,10 @@ def login(request : OAuth2PasswordRequestForm, db: Session):
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="invalid user"
         )
-    access_token = oauth2.create_token({'sub' : user.username})
-    refresh_token = oauth2.create_token({'sub' : user.username}, timedelta(weeks=1))
+    
+    claims = {'sub' : user.username, 'role' : user.role}
+    access_token = oauth2.create_token(claims)
+    refresh_token = oauth2.create_token(claims, timedelta(weeks=1))
 
     user.refresh_token = refresh_token
     db.commit()
@@ -47,10 +61,10 @@ def login(request : OAuth2PasswordRequestForm, db: Session):
         token_type = 'bearer'
     )
 
-def refresh_token(token : str, db: Session):
+async def refresh_token(token : str, db: Session):
     username = oauth2.extract_claim(claim_type = 'sub', token=token)
 
-    user = get_user_by_username(username, db)
+    user = await get_user_by_username(username, db)
 
     if user is None: 
         raise oauth2.credentials_exception
@@ -58,8 +72,9 @@ def refresh_token(token : str, db: Session):
     if token != user.refresh_token: 
         raise oauth2.credentials_exception
     
-    access_token = oauth2.create_token({'sub' : user.username})
-    refresh_token = oauth2.create_token({'sub' : user.username}, timedelta(weeks=1))
+    claims = {'sub' : user.username, 'role' : user.role}
+    access_token = oauth2.create_token(claims)
+    refresh_token = oauth2.create_token(claims, timedelta(weeks=1))
 
     user.refresh_token = refresh_token
     db.commit()
@@ -71,7 +86,7 @@ def refresh_token(token : str, db: Session):
     )
     
 
-def get_user_by_username(username : str, db: Session):
+async def get_user_by_username(username : str, db: Session):
     user = db.query(DbUser).filter(DbUser.username == username).first()
     return user
 
