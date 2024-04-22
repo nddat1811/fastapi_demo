@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr
-from .user import UserBase
+from ..schemas.user import UserBase
 
 from datetime import date
 

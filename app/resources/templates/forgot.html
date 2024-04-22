@@ -1,11 +1,10 @@
 <div>
     <p>Xin chào {{ user.username }}</p>
     <p>Chúng tôi nhận được yêu cầu khôi phục mật khẩu của bạn, 
-        nếu bạn đã thực hiện hành động này, 
-        vui lòng nhấn vào đường dẫn dưới đây để xác nhận việc khôi phục mật khẩu.
-        Đường dẫn có hiệu lực 30 phút kể từ thời điểm bạn nhận được email này.
-        Mật khẩu mới sẽ được gửi vào email của bạn sau khi hoàn thành việc xác nhận.</p>
-    <p><a href="{{ reset_password_url }}">Nhấn vào đây để xác thực</a></p>
+        dưới dây là mã khôi phục mật khẩu của bạn
+        Mã hiệu lực 30 phút kể từ thời điểm bạn nhận được email này.
+        </p>
+    <p>{{ code }}</p>
     <b>Nếu bạn không thực hiện yêu cầu này, vui lòng bỏ qua tin nhắn này.</b>
     <img src="templates/img/logo.png" alt="Logo" width="100" height="100">
 </div>

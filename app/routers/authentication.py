@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from app.db import db_user
 from app.db.database import get_db
 from app.db import oauth2
-from app.shemas.authentication import RefreshTokenRequest
+from app.schemas.authentication import RefreshTokenRequest
 
 
 router = APIRouter(

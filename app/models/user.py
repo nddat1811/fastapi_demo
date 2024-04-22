@@ -2,11 +2,10 @@ from sqlalchemy import Column, Integer, String, Date, DateTime
 from sqlalchemy.orm import relationship
 from app.db.database import Base
 from sqlalchemy.sql import func
-
+from sqlalchemy.orm import relationship
 
 class DbUser(Base):
     __tablename__ = 'users'
-
     id = Column(Integer, primary_key = True)
     role = Column(String, nullable = False) 
     username = Column(String, unique = True)
@@ -21,3 +20,4 @@ class DbUser(Base):
     updated_at = Column(DateTime, default=func.current_timestamp(), onupdate=func.current_timestamp())
     deleted_at = Column(DateTime, default=None) 
 
+    bills = relationship("DbBillWater", back_populates="user")
