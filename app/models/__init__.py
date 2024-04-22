@@ -1,3 +1,3 @@
 from .user import DbUser
-from .bill_water import DbBillWater
+from .water_bill import DbWaterBill
 from app.db.database import Base

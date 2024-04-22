@@ -20,4 +20,4 @@ class DbUser(Base):
     updated_at = Column(DateTime, default=func.current_timestamp(), onupdate=func.current_timestamp())
     deleted_at = Column(DateTime, default=None) 
 
-    bills = relationship("DbBillWater", back_populates="user")
+    bills = relationship("DbWaterBill", back_populates="user")

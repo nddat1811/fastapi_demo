@@ -5,8 +5,8 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
 
-class DbBillWater(Base):
-    __tablename__ = "bill_waters"
+class DbWaterBill(Base):
+    __tablename__ = "water_bills"
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey('users.id'))
     prev_volume = Column(Integer)
