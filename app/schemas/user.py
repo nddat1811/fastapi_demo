@@ -1,4 +1,3 @@
-
 from datetime import date
 from pydantic import BaseModel, EmailStr
 from app.utils.constants import Role

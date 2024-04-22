@@ -56,7 +56,7 @@ async def edit_role(update_role_request : UpdateRoleRequest,  db : Session = Dep
 
 # Forgot password
 @router.post('/forgot-password', response_model= ResetPasswordResponse)
-async def forgot_password(request: Request, req: ForgotPasswordRequest = None, db: Session = Depends(get_db)):
+async def forgot_password(req: ForgotPasswordRequest = None, db: Session = Depends(get_db)):
     user =  await db_user.get_user_by_email(db, req.email) # find the user with the gmail
     if user is None:
         return user
@@ -71,7 +71,7 @@ async def forgot_password(request: Request, req: ForgotPasswordRequest = None, d
     # Pass variable for template
     context = {"user": user, "code": code}
     # Render template from file and return HTML
-    html = templates.TemplateResponse(template_file, {"request": request, **context})
+    html = templates.TemplateResponse(template_file, {"request": req, **context})
 
     message = MessageSchema(
         subject="This mail ",
@@ -84,8 +84,8 @@ async def forgot_password(request: Request, req: ForgotPasswordRequest = None, d
     return user_reset_password
 
 @router.post('/check-code-password', response_model= ResetPasswordResponse)
-async def check_otp_password(req: CheckCodePasswordRequest, db: Session = Depends(get_db)):
-    user = await db_user.check_otp_password(db, req.code)
+async def check_code_password(req: CheckCodePasswordRequest, db: Session = Depends(get_db)):
+    user = await db_user.check_code_password(db, req.code)
     return user
 
 @router.post('/reset-password', response_model= ResetPasswordResponse)

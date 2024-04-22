@@ -130,8 +130,8 @@ async def save_code(db: Session, code: str, user_id: int):
     db.commit()
     return user 
 
-# Check if OTP is valid
-async def check_otp_password(db: Session, code: str):
+# Check if code is valid
+async def check_code_password(db: Session, code: str):
     user = db.query(DbUser).filter(DbUser.code == code).first()
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User with {code} not found")
