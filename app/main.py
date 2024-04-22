@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, status, Response, Request
 # from db import database
 # from routers import user
-from app.db.database import Base, engine
+from app.db.database import engine
 from app import models
 
 app = FastAPI()

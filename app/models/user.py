@@ -1,20 +1,19 @@
+from sqlalchemy import Column, Integer, String, Date, DateTime
 from app.db.database import Base
-from sqlalchemy import Column, String, Integer, Boolean, DateTime
-from sqlalchemy.sql.schema import ForeignKey
-from sqlalchemy.orm import relationship
-
+from sqlalchemy.sql import func
 
 
 class DbUser(Base):
-    __tablename__ = "users"
-    id = Column(Integer, primary_key=True, index=True)
-    username = Column(String)
-    email = Column(String)
-    password = Column(String)
-    expiry = Column(DateTime)
-    # items = relationship("DbArticle", back_populates="user")
+    __tablename__ = 'users'
 
-    def __init__(self, username, email, password):
-        self.username = username
-        self.email = email
-        self.password = password
+    id = Column(Integer, primary_key = True)
+    role = Column(String, nullable = False) 
+    username = Column(String, unique = True)
+    hashed_password = Column(String)
+    email = Column(String)
+    dob = Column(Date)
+    refresh_token = Column(String)
+    last_login = Column(DateTime)
+    created_at = Column(DateTime, default=func.current_timestamp()) 
+    updated_at = Column(DateTime, default=func.current_timestamp(), onupdate=func.current_timestamp())
+    deleted_at = Column(DateTime, default=None) 
