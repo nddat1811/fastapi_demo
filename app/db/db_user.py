@@ -121,7 +121,7 @@ async def delete_user(id : int, db : Session):
 
 
 # Save OTP into reset password database
-async def save_otp(db: Session, code: str, user_id: int):
+async def save_code(db: Session, code: str, user_id: int):
     user = await get_user_by_id(db, user_id)
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User with {user_id} not found")
@@ -137,6 +137,9 @@ async def check_otp_password(db: Session, code: str):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User with {code} not found")
     current_time = datetime.now()
     if current_time < user.expiry:
+        user.code = None
+        user.expiry = None
+        db.commit()
         return user
     else:
         raise HTTPException(status_code=status.HTTP_410_GONE, detail=f"The code {code} is not available")

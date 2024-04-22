@@ -2,13 +2,13 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from app.models import user
 from app.models.user import DbUser
-from app.schemas.user import UpdateRoleRequest, UpdateUserRequest, UserBase, UserDisplay, UserResetPassword, ResetPasswordResponse
+from app.schemas.user import CheckCodePasswordRequest, ForgotPasswordRequest, UpdateRoleRequest, UpdateUserRequest, UserDisplay, UserResetPasswordRequest, ResetPasswordResponse
 from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.db import db_user
 from fastapi.templating import Jinja2Templates
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
-from app.utils.otp import generate_otp
+from app.utils.generate import generate_code
 
 router = APIRouter(
     prefix='/users',
@@ -56,13 +56,13 @@ async def edit_role(update_role_request : UpdateRoleRequest,  db : Session = Dep
 
 # Forgot password
 @router.post('/forgot-password', response_model= ResetPasswordResponse)
-async def forgot_password(request: Request, email: str = None, db: Session = Depends(get_db)):
-    user =  await db_user.get_user_by_email(db, email) # find the user with the gmail
+async def forgot_password(request: Request, req: ForgotPasswordRequest = None, db: Session = Depends(get_db)):
+    user =  await db_user.get_user_by_email(db, req.email) # find the user with the gmail
     if user is None:
         return user
-    # Generate code otp (string: 6 digits random)
-    code = generate_otp()
-    user_reset_password = await db_user.save_otp(db, code, user.id) 
+    # Generate code code (string: 6 digits random)
+    code = generate_code()
+    user_reset_password = await db_user.save_code(db, code, user.id) 
     if user_reset_password is None:
         return user_reset_password
 
@@ -75,7 +75,7 @@ async def forgot_password(request: Request, email: str = None, db: Session = Dep
 
     message = MessageSchema(
         subject="This mail ",
-        recipients=[email],
+        recipients=[req.email],
         body=html.body,
         subtype=MessageType.html)
 
@@ -83,13 +83,13 @@ async def forgot_password(request: Request, email: str = None, db: Session = Dep
     await fast_mail.send_message(message)
     return user_reset_password
 
-@router.post('/check-otp-password', response_model= ResetPasswordResponse)
-async def check_otp_password(code: str, db: Session = Depends(get_db)):
-    user = await db_user.check_otp_password(db, code)
+@router.post('/check-code-password', response_model= ResetPasswordResponse)
+async def check_otp_password(req: CheckCodePasswordRequest, db: Session = Depends(get_db)):
+    user = await db_user.check_otp_password(db, req.code)
     return user
 
 @router.post('/reset-password', response_model= ResetPasswordResponse)
-async def reset_password(req: UserResetPassword, db: Session = Depends(get_db)):
+async def reset_password(req: UserResetPasswordRequest, db: Session = Depends(get_db)):
     if req.new_pass != req.conf_pass:
         return "Invalid"
     # Temporary use user_id pass in form
