@@ -1,5 +1,5 @@
-from gc import disable
-from fastapi import APIRouter, Body, Depends
+
+from fastapi import APIRouter, Depends, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from app.db import db_user
@@ -12,7 +12,7 @@ router = APIRouter(
     tags=['Authentication']
 )
 
-@router.post('/register', response_model = UserBase)
+@router.post('/register', response_model = UserBase, status_code= status.HTTP_201_CREATED)
 async def register(registration_request : RegistrationRequest, db : Session = Depends(get_db)):
     return await db_user.create_new_user(registration_request, db)
 
