@@ -1,11 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException, Request, status
-from app.schemas.user import UserResetPassword, ResetPasswordResponse
+from fastapi import APIRouter, Depends
+from app.schemas.user import EmailResetPasswordRequest, OTPResetPasswordRequest, UserResetPasswordRequest, ResetPasswordResponse
 from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.db import db_user
 from fastapi.templating import Jinja2Templates
-from ..schemas.user import UserBase
-from ..schemas.authentication import RegistrationRequest
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
 from app.utils.otp import generate_otp
 
@@ -31,8 +29,8 @@ conf = ConnectionConfig(
 
 # Forgot password
 @router.post('/forgot-password', response_model= ResetPasswordResponse)
-async def forgot_password(request: Request, email: str = None, db: Session = Depends(get_db)):
-    user =  await db_user.get_user_by_email(db, email) # find the user with the gmail
+async def forgot_password(req_email: EmailResetPasswordRequest = None, db: Session = Depends(get_db)):
+    user =  await db_user.get_user_by_email(db, req_email.email) # find the user with the gmail
     if user is None:
         return user
     # Generate code otp (string: 6 digits random)
@@ -46,11 +44,11 @@ async def forgot_password(request: Request, email: str = None, db: Session = Dep
     # Pass variable for template
     context = {"user": user, "code": code}
     # Render template from file and return HTML
-    html = templates.TemplateResponse(template_file, {"request": request, **context})
+    html = templates.TemplateResponse(template_file, {"request": req_email, **context})
 
     message = MessageSchema(
         subject="This mail ",
-        recipients=[email],
+        recipients=[req_email.email],
         body=html.body,
         subtype=MessageType.html)
 
@@ -59,12 +57,12 @@ async def forgot_password(request: Request, email: str = None, db: Session = Dep
     return user_reset_password
 
 @router.post('/check-otp-password', response_model= ResetPasswordResponse)
-async def check_otp_password(code: str, db: Session = Depends(get_db)):
-    user = await db_user.check_otp_password(db, code)
+async def check_otp_password(req_code: OTPResetPasswordRequest, db: Session = Depends(get_db)):
+    user = await db_user.check_otp_password(db, req_code.code)
     return user
 
 @router.post('/reset-password', response_model= ResetPasswordResponse)
-async def reset_password(req: UserResetPassword, db: Session = Depends(get_db)):
+async def reset_password(req: UserResetPasswordRequest, db: Session = Depends(get_db)):
     if req.new_pass != req.conf_pass:
         return "Invalid"
     # Temporary use user_id pass in form
