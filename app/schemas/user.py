@@ -1,4 +1,5 @@
 from datetime import date
+from typing import List
 from pydantic import BaseModel, EmailStr
 from app.utils.constants import Role
 
@@ -23,12 +24,10 @@ class ResetPasswordResponse(BaseModel):
     dob: date
 
 class UpdateUserRequest(BaseModel):
-    id : int
     role : Role
     dob : date
 
 class UpdateRoleRequest(BaseModel):
-    id : int
     role : Role
 
 class ForgotPasswordRequest(BaseModel):
