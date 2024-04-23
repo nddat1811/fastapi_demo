@@ -1,5 +1,6 @@
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, Request, status
+from app.db.oauth2 import RoleChecker
 from app.models import user
 from app.models.user import DbUser
 from app.schemas.user import CheckCodePasswordRequest, ForgotPasswordRequest, UpdateRoleRequest, UpdateUserRequest, UserDisplay, UserResetPasswordRequest, ResetPasswordResponse
@@ -8,6 +9,7 @@ from app.db.database import get_db
 from app.db import db_user
 from fastapi.templating import Jinja2Templates
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
+from app.utils.constants import Role
 from app.utils.generate import generate_code
 
 router = APIRouter(
@@ -31,24 +33,24 @@ conf = ConnectionConfig(
 
 
 @router.get('/', response_model = List[UserDisplay])
-async def get_all_users(db : Session = Depends(get_db)):
+async def get_all_users(db : Session = Depends(get_db), _ : bool = Depends(RoleChecker(allowed_roles=[Role.ADMIN]))):
     return db.query(DbUser).all()
 
 @router.get('/{id}', response_model = UserDisplay)
 async def get_user_by_id(id : int, db : Session = Depends(get_db)): 
     return await db_user.get_user_by_id(db, id)
 
-@router.put('/')
-async def update_user(update_user_request: UpdateUserRequest, db : Session = Depends(get_db)):
-    return await db_user.update_user(update_user_request, db)
+@router.put('/{id}', response_model=UserDisplay)
+async def update_user(update_user_request: UpdateUserRequest, id : int ,db : Session = Depends(get_db)):
+    return await db_user.update_user(update_user_request, id, db)
 
 @router.delete('/{id}')
 async def delete_user( id : int, db : Session = Depends(get_db)):
     return await db_user.delete_user(id, db)
 
-@router.put('/role', response_model=UserDisplay)
-async def edit_role(update_role_request : UpdateRoleRequest,  db : Session = Depends(get_db)):
-    user = await db_user.get_user_by_id(db, update_role_request.id)
+@router.put('/role/{id}', response_model=UserDisplay)
+async def edit_role(update_role_request : UpdateRoleRequest, id : int, db : Session = Depends(get_db)):
+    user = await db_user.get_user_by_id(db, id)
     user.role = update_role_request.role
     db.commit()
     return user

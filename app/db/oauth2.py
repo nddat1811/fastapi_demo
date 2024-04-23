@@ -1,8 +1,7 @@
 from datetime import datetime, timedelta, timezone
-from os import error
 from typing import Optional
 from fastapi import Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security import OAuth2PasswordBearer, SecurityScopes
 from sqlalchemy.orm import Session
 from .database import get_db
 from jose import JWTError, jwt
@@ -23,9 +22,9 @@ credentials_exception = HTTPException(
 )
 
 #Get current user
-def get_current_user(token : str = Depends(oauth2_bearer), db : Session = Depends(get_db)):
+async def get_current_user(security_scopes : SecurityScopes, token : str = Depends(oauth2_bearer), db : Session = Depends(get_db)) -> DbUser:
     username = extract_claim(claim_type = 'sub', token=token)
-    user = db_user.get_user_by_username(username, db)
+    user = await db_user.get_user_by_username(username, db)
     
     if user is None: 
         raise credentials_exception
@@ -57,3 +56,15 @@ def extract_claim(claim_type : str, token : str):
         print('decode error')
         raise credentials_exception
     return claim
+
+class RoleChecker:
+  def __init__(self, allowed_roles):
+    self.allowed_roles = allowed_roles
+
+  def __call__(self, user: DbUser = Depends(get_current_user)):
+    if user.role in self.allowed_roles:
+        return True
+    raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED, 
+        detail="You don't have enough permissions"
+        )

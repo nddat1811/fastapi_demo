@@ -7,9 +7,9 @@ from app.schemas.user import UpdateUserRequest
 from app.utils.constants import Role
 from . import hash, oauth2
 from datetime import timedelta, datetime
-from app.models import DbUser, user
+from app.models import DbUser
 
-async def create_new_user(registration_request : RegistrationRequest, db : Session):
+async def create_new_user(registration_request : RegistrationRequest, db : Session) -> DbUser:
 
     if await get_user_by_username(registration_request.username, db):
         raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail='username already existed')
@@ -30,11 +30,11 @@ async def create_new_user(registration_request : RegistrationRequest, db : Sessi
     db.refresh(user)
     return user
 
-async def is_email_non_exist(email: str, db : Session):
+async def is_email_non_exist(email: str, db : Session) -> bool:
     user = db.query(DbUser).filter(DbUser.email == email).first()
     return user is None
 
-async def login(request : OAuth2PasswordRequestForm, db: Session):
+async def login(request : OAuth2PasswordRequestForm, db: Session) -> AuthResponse:
     user = await get_user_by_username(request.username, db)
 
     if user is None:
@@ -62,7 +62,7 @@ async def login(request : OAuth2PasswordRequestForm, db: Session):
         token_type = 'bearer'
     )
 
-async def refresh_token(token : str, db: Session):
+async def refresh_token(token : str, db: Session) -> AuthResponse:
     username = oauth2.extract_claim(claim_type = 'sub', token=token)
 
     user = await get_user_by_username(username, db)
@@ -87,8 +87,8 @@ async def refresh_token(token : str, db: Session):
     )
     
 
-async def get_user_by_username(username : str, db: Session):
-    user = db.query(DbUser).filter(DbUser.username == username, DbUser.deleted_at != None).first()
+async def get_user_by_username(username : str, db: Session) -> DbUser | None:
+    user = db.query(DbUser).filter(DbUser.username == username, DbUser.deleted_at == None).first()
     return user
 
 async def get_user_by_email(db: Session, email: str):
@@ -103,8 +103,8 @@ async def get_user_by_id(db: Session, id: int):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with email: {id} not found")
     return user
 
-async def update_user(user_update_request : UpdateUserRequest,  db : Session):
-    user = await get_user_by_id(db, user_update_request.id)
+async def update_user(user_update_request : UpdateUserRequest, id : int, db : Session) -> DbUser:
+    user = await get_user_by_id(db, id)
     user.role = user_update_request.role
     user.dob = user_update_request.dob
     db.commit()
