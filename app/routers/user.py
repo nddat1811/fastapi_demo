@@ -10,7 +10,7 @@ from app.db import db_user
 from fastapi.templating import Jinja2Templates
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
 from app.utils.constants import Role
-from app.utils.generate import generate_code
+from app.utils.helper import generate_code
 
 router = APIRouter(
     prefix='/users',
