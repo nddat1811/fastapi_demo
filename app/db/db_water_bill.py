@@ -11,6 +11,7 @@ from . import hash, oauth2
 from datetime import timedelta, datetime
 from app.models import DbWaterBill
 from . import db_user
+from sqlalchemy import text
 
 
 async def get_water_bill_by_id(id: int, db: Session):
@@ -75,4 +76,32 @@ async def get_list_water_bill(db:Session):
 
 async def get_list_water_bill_by_user_id(user_id:int, db:Session):
     bills = db.query(DbWaterBill).filter(DbWaterBill.user_id == user_id).order_by(desc(DbWaterBill.created_at)).all()
+    return bills
+
+async def get_water_bill_in_month(p_month: int, db: Session):
+    # execute stored procedure
+    stmt = text("CALL WaterBillInMonth(:p_month, 'rs_resultone')")
+    db.execute(stmt, {'p_month': p_month})
+    results = db.execute(text("FETCH ALL FROM rs_resultone"))
+    # parse the results into a list
+    bills = []
+    for row in results:
+        try:
+            # Can unpacking the results then create bill dicts or use rows
+            # username, prev_volume, cur_volume, total_volume, price, total_volume_price, due_date, payment_date,created_date = row
+            bill_dict = {
+            "username": row[0],
+            "prev_volume": row[1],
+            "cur_volume": row[2],
+            "total_volume": row[3],
+            "price": row[4],
+            "total_volume_price": row[5],
+            "due_date": row[6],
+            "payment_date": row[7],
+            "created_date": row[8],
+            }
+            bills.append(bill_dict)
+        except ValueError as e:
+            print(f"Error processing row: {e}")
+
     return bills
