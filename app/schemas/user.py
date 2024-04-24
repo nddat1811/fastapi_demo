@@ -24,7 +24,6 @@ class ResetPasswordResponse(BaseModel):
     dob: date
 
 class UpdateUserRequest(BaseModel):
-    role : Role
     dob : date
 
 class UpdateRoleRequest(BaseModel):

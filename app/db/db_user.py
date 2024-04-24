@@ -4,7 +4,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from ..auth import oauth2
 from app.schemas.authentication import AuthResponse, RegistrationRequest
-from app.schemas.user import UpdateUserRequest
+from app.schemas.user import UpdateRoleRequest, UpdateUserRequest
 from app.utils.constants import Role
 from . import hash
 from datetime import timedelta, datetime
@@ -88,12 +88,12 @@ async def refresh_token(token : str, db: Session) -> AuthResponse:
     )
     
 
-async def get_user_by_username(username : str, db: Session) -> DbUser | None:
+async def get_user_by_username(username : str, db: Session) -> DbUser:
     user = db.query(DbUser).filter(DbUser.username == username, DbUser.deleted_at == None).first()
     return user
 
 async def get_user_by_email(db: Session, email: str):
-    user = db.query(DbUser).filter(DbUser.email == email).first()
+    user = db.query(DbUser).filter(DbUser.email == email, DbUser.deleted_at == None).first()
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with email: {email} not found")
     return user
@@ -104,10 +104,15 @@ async def get_user_by_id(db: Session, id: int):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with id: {id} not found")
     return user
 
-async def update_user(user_update_request : UpdateUserRequest, id : int, db : Session) -> DbUser:
-    user = await get_user_by_id(db, id)
-    user.role = user_update_request.role
+async def update_current_user(user_update_request : UpdateUserRequest, current_user: DbUser, db : Session) -> DbUser:
+    user = await get_user_by_id(db, current_user.id)
     user.dob = user_update_request.dob
+    db.commit()
+    return user
+
+async def update_role(update_role_request: UpdateRoleRequest, id: int, db: Session):
+    user = await get_user_by_id(db, id)
+    user.role = update_role_request.role
     db.commit()
     return user
 
@@ -115,9 +120,8 @@ async def delete_user(id : int, db : Session):
     user = await get_user_by_id(db, id)
     user.deleted_at = datetime.now()
     db.commit()
-
     return {
-        "message" : f"Delete user {id} successfully"
+        "message" : f"Delete user with id: {id} successfully"
     }
 
 
