@@ -3,7 +3,7 @@ from typing import Optional
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, SecurityScopes
 from sqlalchemy.orm import Session
-from .database import get_db
+from ..db.database import get_db
 from jose import JWTError, jwt
 from app.db import db_user
 from ..models.user import DbUser
@@ -22,7 +22,7 @@ credentials_exception = HTTPException(
 )
 
 #Get current user
-async def get_current_user(security_scopes : SecurityScopes, token : str = Depends(oauth2_bearer), db : Session = Depends(get_db)) -> DbUser:
+async def get_current_user(token : str = Depends(oauth2_bearer), db : Session = Depends(get_db)) -> DbUser:
     username = extract_claim(claim_type = 'sub', token=token)
     user = await db_user.get_user_by_username(username, db)
     
