@@ -9,6 +9,7 @@ class DbWaterBill(Base):
     __tablename__ = "water_bills"
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey('users.id'))
+    created_by = Column(Integer, ForeignKey('users.id'))
     prev_volume = Column(Integer)
     cur_volume = Column(Integer)
     total_volume = Column(Integer)
@@ -19,4 +20,5 @@ class DbWaterBill(Base):
     created_at = Column(DateTime, server_default=func.now())
     updated_at = Column(DateTime, nullable=True, default=None, server_default=func.now(), onupdate=func.current_timestamp())
     deleted_at = Column(DateTime, nullable=True)
-    user = relationship("DbUser", back_populates="bills")
+    user = relationship("DbUser", foreign_keys=[user_id], back_populates="bills")
+    creator = relationship("DbUser", foreign_keys=[created_by], back_populates="created_bills")

@@ -7,9 +7,10 @@ LANGUAGE 'plpgsql'
 AS $BODY$
 BEGIN
     OPEN refcur for
-    SELECT u.username, w.prev_volume, w.cur_volume, 
+    SELECT u.username, u2.username as creator, w.prev_volume, w.cur_volume, 
         w.total_volume, w.price, w.total_volume_price, w.due_date, w.payment_date, w.created_at
     FROM water_bills w JOIN users u ON w.user_id = u.id
+    				   join users u2 on w.created_by = u2.id
     WHERE p_Month = EXTRACT (MONTH FROM w.created_at);
 --     query command, for example:
 --     SELECT * FROM "user";

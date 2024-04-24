@@ -4,15 +4,20 @@ from typing import Optional
 
 
 class NewWaterBillRequest(BaseModel):
-    staff_id: int
     user_id :int
     prev_volume: int
     cur_volume: int
 
 
+class User(BaseModel):
+    id: int
+    username: str
+    class Config:
+        from_attributes = True
 class WaterBillResponse(BaseModel):
     id: int
-    user_id :int
+    user: User
+    creator: User
     prev_volume: int
     cur_volume: int
     total_volume: int
@@ -28,3 +33,5 @@ class UpdateWaterBillRequest(BaseModel):
     user_id: int
     pay: Optional[bool]
     flag_delete: Optional[bool]
+
+
