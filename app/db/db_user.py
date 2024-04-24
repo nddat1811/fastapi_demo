@@ -2,10 +2,11 @@ from datetime import timedelta
 from fastapi import HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
+from ..auth import oauth2
 from app.schemas.authentication import AuthResponse, RegistrationRequest
 from app.schemas.user import UpdateUserRequest
 from app.utils.constants import Role
-from . import hash, oauth2
+from . import hash
 from datetime import timedelta, datetime
 from app.models import DbUser
 
@@ -98,9 +99,9 @@ async def get_user_by_email(db: Session, email: str):
     return user
 
 async def get_user_by_id(db: Session, id: int):
-    user = db.query(DbUser).filter(DbUser.id == id).first()
+    user = db.query(DbUser).filter(DbUser.id == id, DbUser.deleted_at == None).first()
     if not user:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with email: {id} not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with id: {id} not found")
     return user
 
 async def update_user(user_update_request : UpdateUserRequest, id : int, db : Session) -> DbUser:
