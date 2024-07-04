@@ -12,6 +12,12 @@ from app.models import DbUser
 
 async def create_new_user(registration_request : RegistrationRequest, db : Session) -> DbUser:
 
+    bills = []  # Giả sử bills là danh sách hóa đơn được trả về từ cơ sở dữ liệu
+    if len(bills) == 0:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Invalid query')
+
+    return {"data": bills}
+
     if await get_user_by_username(registration_request.username, db):
         raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail='username already existed')
     

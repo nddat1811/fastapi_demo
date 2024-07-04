@@ -1,9 +1,10 @@
+
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from app.auth.oauth2 import RoleChecker, get_current_user
 from app.models import user
 from app.models.user import DbUser
-from app.schemas.user import CheckCodePasswordRequest, ForgotPasswordRequest, UpdateRoleRequest, UpdateUserRequest, UserDisplay, UserResetPasswordRequest, ResetPasswordResponse
+from app.schemas.user import CheckCodePasswordRequest, ForgotPasswordRequest, UpdateRoleRequest, UpdateUserRequest, User2Base, User3Base, UserDisplay, UserResetPasswordRequest, ResetPasswordResponse
 from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.db import db_user
@@ -36,10 +37,23 @@ conf = ConnectionConfig(
 async def get_all_users(db : Session = Depends(get_db), _ : bool = Depends(RoleChecker(allowed_roles=[Role.ADMIN, Role.STAFF]))):
     return db.query(DbUser).all()
 
-@router.get('/{id}', response_model = UserDisplay)
-async def get_user_by_id(id : int, db : Session = Depends(get_db), _ : DbUser = Depends(get_current_user)): 
-    return await db_user.get_user_by_id(db, id)
+@router.get('/{id}', response_model = User2Base)
+async def get_user_by_id(id : int, db : Session = Depends(get_db)): #, _ : DbUser = Depends(get_current_user) 
+    
+    user = await db_user.get_user_by_id(db, id)
+    return {
+        "message": "Lấy thông tin user thành công",
+        "data": user
+    }
 
+@router.get('/2/{id}', response_model=User3Base)
+async def get_user_by_id(id : int, db : Session = Depends(get_db)): #, _ : DbUser = Depends(get_current_user) 
+    
+    user = await db_user.get_user_by_id(db, id)
+    return {
+        "message": "Lấy thông tin user thành công",
+        "data": user
+    }
 #thiếu get profile
 
 @router.put('/{id}', response_model=UserDisplay)

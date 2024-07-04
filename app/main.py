@@ -4,12 +4,13 @@ from app.auth import authentication
 from app.routers import user
 from app.db.database import engine
 from app import models
-from app.routers import user, water_bill
+from app.routers import user, water_bill, crawl
 
 app = FastAPI()
 app.include_router(user.router)
 app.include_router(authentication.router)
 app.include_router(water_bill.router)
+app.include_router(crawl.router)
 
 @app.get('/')
 def index():
