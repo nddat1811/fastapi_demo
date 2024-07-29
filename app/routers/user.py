@@ -37,40 +37,23 @@ conf = ConnectionConfig(
 async def get_all_users(db : Session = Depends(get_db), _ : bool = Depends(RoleChecker(allowed_roles=[Role.ADMIN, Role.STAFF]))):
     return db.query(DbUser).all()
 
-@router.get('/{id}', response_model = User2Base)
-async def get_user_by_id(id : int, db : Session = Depends(get_db)): #, _ : DbUser = Depends(get_current_user) 
-    
-    user = await db_user.get_user_by_id(db, id)
-    return {
-        "message": "Lấy thông tin user thành công",
-        "data": user
-    }
+@router.get('/{id}', response_model = UserDisplay)
+async def get_user_by_id(id : int, db : Session = Depends(get_db), _ : DbUser = Depends(get_current_user)): 
+    return await db_user.get_user_by_id(db, id)
 
-@router.get('/2/{id}', response_model=User3Base)
-async def get_user_by_id(id : int, db : Session = Depends(get_db)): #, _ : DbUser = Depends(get_current_user) 
-    
-    user = await db_user.get_user_by_id(db, id)
-    return {
-        "message": "Lấy thông tin user thành công",
-        "data": user
-    }
 #thiếu get profile
 
-@router.put('/{id}', response_model=UserDisplay)
-async def update_user(update_user_request: UpdateUserRequest, id : int ,db : Session = Depends(get_db),  _ : bool = Depends(RoleChecker(allowed_roles=[Role.ADMIN, Role.STAFF, Role.USER]))):
-    return await db_user.update_user(update_user_request, id, db)
+@router.put('/current_user', response_model=UserDisplay)
+async def update_current_user(update_user_request: UpdateUserRequest, db : Session = Depends(get_db),  current_user : DbUser = Depends(get_current_user)):
+    return await db_user.update_current_user(update_user_request, current_user, db)
 
 @router.delete('/{id}')
-async def delete_user( id : int, db : Session = Depends(get_db), _ : DbUser = Depends(get_current_user)):
+async def delete_user( id: int, db: Session = Depends(get_db), _: bool = Depends(RoleChecker([Role.ADMIN]))):
     return await db_user.delete_user(id, db)
 
-#update, delete user chỉ current user hiện tại edit dc của mình
 @router.put('/role/{id}', response_model=UserDisplay)
-async def edit_role(update_role_request : UpdateRoleRequest, id : int, db : Session = Depends(get_db), _ : bool = Depends(RoleChecker(allowed_roles=[Role.ADMIN]))): #add role admin
-    user = await db_user.get_user_by_id(db, id)
-    user.role = update_role_request.role
-    db.commit()
-    return user
+async def edit_role(update_role_request : UpdateRoleRequest, id : int, db : Session = Depends(get_db), _ : bool = Depends(RoleChecker(allowed_roles=[Role.ADMIN]))):
+    return await db_user.update_role(update_role_request, id, db)
 
 
 # Forgot password
