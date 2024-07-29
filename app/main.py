@@ -10,7 +10,7 @@ app = FastAPI()
 app.include_router(user.router)
 app.include_router(authentication.router)
 app.include_router(water_bill.router)
-app.include_router(crawl.router)
+# app.include_router(crawl.router)
 
 @app.get('/')
 def index():
