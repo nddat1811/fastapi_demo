@@ -8,24 +8,6 @@ class UserBase(BaseModel):
     email : EmailStr
     dob : date
 
-class User2Base(BaseModel):
-    username: str
-    email: str
-    code: Optional[str] = None
-    expiry: datetime
-    refresh_token: Optional[str] = None
-    created_at: datetime
-    deleted_at: Optional[datetime] = None
-    role: str
-    id: int
-    hashed_password: Optional[str] = None
-    dob: datetime
-    last_login: Optional[datetime] = None
-    updated_at: datetime
-
-class User3Base(BaseModel):
-    message: str
-    data: User2Base
 
 class UserDisplay(UserBase):
     id : int
