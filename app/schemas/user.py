@@ -6,7 +6,6 @@ from app.utils.constants import Role
 class UserBase(BaseModel):
     username : str
     email : EmailStr
-    dob : date
 
 
 class UserDisplay(UserBase):
@@ -23,7 +22,6 @@ class ResetPasswordResponse(BaseModel):
     id: int
     username: str
     email: str
-    dob: date
 
 class UpdateUserRequest(BaseModel):
     role : Role

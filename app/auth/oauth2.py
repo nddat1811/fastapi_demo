@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from ..db.database import get_db
 from jose import JWTError, jwt
 from app.db import db_user
-from ..models.user import DbUser
+from ..models.user import SysUser
 
 oauth2_bearer = OAuth2PasswordBearer(tokenUrl='auth/login')
 
@@ -22,7 +22,7 @@ credentials_exception = HTTPException(
 )
 
 #Get current user
-async def get_current_user(token : str = Depends(oauth2_bearer), db : Session = Depends(get_db)) -> DbUser:
+async def get_current_user(token : str = Depends(oauth2_bearer), db : Session = Depends(get_db)) -> SysUser:
     username = extract_claim(claim_type = 'sub', token=token)
     user = await db_user.get_user_by_username(username, db)
     
@@ -61,7 +61,7 @@ class RoleChecker:
   def __init__(self, allowed_roles):
     self.allowed_roles = allowed_roles
 
-  def __call__(self, user: DbUser = Depends(get_current_user)):
+  def __call__(self, user: SysUser = Depends(get_current_user)):
     if user.role in self.allowed_roles:
         return True
     raise HTTPException(

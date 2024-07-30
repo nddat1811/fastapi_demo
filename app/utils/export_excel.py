@@ -4,7 +4,7 @@ from app.utils.helper import convert_date
 from openpyxl.styles.borders import Border, Side
 from io import BytesIO
 
-def edit_excel_file(input_data, buffer):
+# def edit_excel_file(input_data, buffer):
     current_directory = os.path.dirname(os.path.realpath(__file__))
 
     # Navigate to the parent directory (one level up from the current directory)

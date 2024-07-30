@@ -3,8 +3,8 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from app.auth.oauth2 import RoleChecker, get_current_user
 from app.models import user
-from app.models.user import DbUser
-from app.schemas.user import CheckCodePasswordRequest, ForgotPasswordRequest, UpdateRoleRequest, UpdateUserRequest, User2Base, User3Base, UserDisplay, UserResetPasswordRequest, ResetPasswordResponse
+from app.models.user import SysUser
+from app.schemas.user import CheckCodePasswordRequest, ForgotPasswordRequest, UpdateRoleRequest, UpdateUserRequest, UserDisplay, UserResetPasswordRequest, ResetPasswordResponse
 from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.db import db_user
@@ -33,18 +33,18 @@ conf = ConnectionConfig(
 )
 
 
-@router.get('/', response_model = List[UserDisplay])
-async def get_all_users(db : Session = Depends(get_db), _ : bool = Depends(RoleChecker(allowed_roles=[Role.ADMIN, Role.STAFF]))):
-    return db.query(DbUser).all()
+@router.get('/')
+async def get_all_users(db : Session = Depends(get_db), ):
+    return db.query(SysUser).all()
 
-@router.get('/{id}', response_model = UserDisplay)
-async def get_user_by_id(id : int, db : Session = Depends(get_db), _ : DbUser = Depends(get_current_user)): 
+@router.get('/{id}')
+async def get_user_by_id(id : int, db : Session = Depends(get_db)): 
     return await db_user.get_user_by_id(db, id)
 
 #thiếu get profile
 
 @router.put('/current_user', response_model=UserDisplay)
-async def update_current_user(update_user_request: UpdateUserRequest, db : Session = Depends(get_db),  current_user : DbUser = Depends(get_current_user)):
+async def update_current_user(update_user_request: UpdateUserRequest, db : Session = Depends(get_db),  current_user : SysUser = Depends(get_current_user)):
     return await db_user.update_current_user(update_user_request, current_user, db)
 
 @router.delete('/{id}')

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, Date, DateTime, Table
+from sqlalchemy import Column, ForeignKey, Integer, String, Date, DateTime, Table,Float,Text
 from sqlalchemy.orm import relationship
 from app.db.database import Base
 
@@ -12,7 +12,8 @@ class SysLog(Base):
     method = Column(String(50))
     ip = Column(String(50))
     status_response = Column(String(50))
-    response = Column(String(255))
+    response = Column(Text)
     description = Column(String(255))
-    request = Column(String(255))
-    duration = Column(float)
+    request = Column(Text)
+    duration = Column(Float)
+    
