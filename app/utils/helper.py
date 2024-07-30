@@ -1,6 +1,8 @@
 import random
 from datetime import datetime
 
+from app.utils.constants import URL_PATH
+
 # Generate random 6 digits to create code
 def generate_code():
     otp = ''.join([str(random.randint(0, 9)) for _ in range(6)])
@@ -14,3 +16,10 @@ def convert_date(data):
         item["payment_date"] = None if item["payment_date"] is None else item["payment_date"].date().isoformat()
     
     return data
+
+
+def is_not_authen(url: str) -> bool:
+    print("t:", url) 
+    # return url in URL_PATH
+    return True
+    return False

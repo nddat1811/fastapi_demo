@@ -51,11 +51,6 @@ async def update_current_user(update_user_request: UpdateUserRequest, db : Sessi
 async def delete_user( id: int, db: Session = Depends(get_db), _: bool = Depends(RoleChecker([Role.ADMIN]))):
     return await db_user.delete_user(id, db)
 
-@router.put('/role/{id}', response_model=UserDisplay)
-async def edit_role(update_role_request : UpdateRoleRequest, id : int, db : Session = Depends(get_db), _ : bool = Depends(RoleChecker(allowed_roles=[Role.ADMIN]))):
-    return await db_user.update_role(update_role_request, id, db)
-
-
 # Forgot password
 @router.post('/forgot-password', response_model= ResetPasswordResponse)
 async def forgot_password(req: ForgotPasswordRequest = None, db: Session = Depends(get_db)):

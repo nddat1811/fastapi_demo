@@ -1,7 +1,10 @@
 from fastapi import FastAPI, HTTPException, status, Response, Request
 # from db import database
 from app.auth import authentication
+from app.auth.oauth2 import get_current_user
+from app.db.db_function import is_authentication
 from app.db.db_log import LogModel, log_FILE
+from app.models.user import SysUser
 from app.routers import user
 from app.db.database import engine, get_db
 from app import models
@@ -12,6 +15,8 @@ import time
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from sqlalchemy.orm import Session
 from datetime import date, datetime
+
+from app.utils.helper import is_not_authen
 app = FastAPI()
 app.include_router(user.router)
 app.include_router(authentication.router)
@@ -21,33 +26,42 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 class LoggingMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
+        db: Session = next(get_db())
         start_time = time.time()
         request_body = await request.body()
         
         # Log request details
         logger.warning(f"Request: {request.method} {request.url.path} from {request.client.host}")
         
+        if(is_not_authen(request.url.path)):
+            try:
+                token = request.headers.get('Authorization').split(" ")[1]
+                current_user: SysUser = await get_current_user(token, db)
+                user_info = f"User: {current_user.id}"
+                print(request.url.path)    
+                # t = is_authentication(current_user.id, request.url.path, db)
+            except Exception as e:
+                user_info = "User: Unauthenticated"
+                logger.error(f"Authentication error: {str(e)}")
+        else:
+            print('con lai in ra')
         response = await call_next(request)
         
         process_time = time.time() - start_time
         
         # Log response details
-        logger.warning(
-            f"Response: {response.status_code} "
-            f"for {request.method} {request.url.path} "
-            f"from {request.client.host} "
-            f"in {process_time:.2f} seconds"
-        )
+        # logger.warning(
+        #     f"Response: {response.status_code} "
+        #     f"for {request.method} {request.url.path} "
+        #     f"from {request.client.host} "
+        #     f"in {process_time:.2f} seconds"
+        # )
         #response
         body_iterator = response.body_iterator
         body = b"".join([section async for section in body_iterator])
         body_str = body.decode()
-        print("HMM")
         response = Response(content=body_str, status_code=response.status_code, headers=dict(response.headers))
         response.headers["Content-Length"] = str(len(body_str))
-        
-        
-        print("res:", request_body)
 
         logger.info(
         f"{request.method} request to {request.url} metadata\n"
@@ -55,8 +69,7 @@ class LoggingMiddleware(BaseHTTPMiddleware):
         f"\tBody: {request_body}\n"
         f"\tPath Params: {request.path_params}\n"
         f"\tQuery Params: {request.query_params}\n"
-        f"\tCookies: {request.cookies}\n"
-    )
+        f"\tCookies: {request.cookies}\n")
 
         req = LogModel(
             action_datetime = datetime.now(),
@@ -68,7 +81,6 @@ class LoggingMiddleware(BaseHTTPMiddleware):
             duration=process_time,
             request="t",
         )
-        db: Session = next(get_db())
         log_FILE(req, db)
         return response
 

@@ -18,3 +18,9 @@ class PermissionEnum(Enum):
     CREATE = 'CREATE'
     EXPORT_EXCEL = 'EXPORT_EXCEL'
     VIEW = 'VIEW'
+
+
+URL_PATH = {
+    '/auth/login': False,
+    '/hiu': False,
+}
