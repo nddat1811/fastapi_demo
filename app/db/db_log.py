@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel
 from app.models.log import SysLog
 from datetime import date, datetime
@@ -10,11 +11,12 @@ class LogModel(BaseModel):
     ip:str
     status_response: int
     response: str
-    request: str
+    request_body: Optional[str]
+    request_query: Optional[str]
     duration: float
     
     
-def log_FILE(req: LogModel, db : Session):
+def write_log_DB(req: LogModel, db : Session):
     log = SysLog(
         action_datetime=req.action_datetime,
         path_name=req.path_name,
@@ -22,7 +24,8 @@ def log_FILE(req: LogModel, db : Session):
         ip=req.ip,
         status_response=req.status_response,
         response=req.response,
-        request=req.request,
+        request_body=req.request_body,
+        request_query=req.request_query,
         duration=req.duration
     )
 

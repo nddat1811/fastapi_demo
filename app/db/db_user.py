@@ -5,7 +5,6 @@ from sqlalchemy.orm import Session
 from ..auth import oauth2
 from app.schemas.authentication import AuthResponse, RegistrationRequest
 from app.schemas.user import UpdateUserRequest
-from app.utils.constants import Role
 from . import hash
 from datetime import timedelta, datetime
 from app.models import SysUser

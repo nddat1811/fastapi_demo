@@ -9,13 +9,13 @@ from app.models.user import SysUserRole
 from ..auth import oauth2
 from app.schemas.authentication import AuthResponse, RegistrationRequest
 from app.schemas.user import UpdateUserRequest
-from app.utils.constants import Role
 from . import hash
 from datetime import timedelta, datetime
 from app.models import SysUser
 
 
 def is_authentication(user_id: int, url: str, db : Session) -> bool:
+    print("---------------------------\n\n\n\n\n")
     auth_query = (
         db.query(SysUser)
         .join(SysUserRole, SysUser.id == SysUserRole.user_id)
@@ -23,8 +23,10 @@ def is_authentication(user_id: int, url: str, db : Session) -> bool:
         .join(SysRoleFunction, SysRole.id == SysRoleFunction.role_id)
         .join(SysFunction, SysRoleFunction.function_id == SysFunction.id)
         .filter(
-            SysUser.id == user_id,
-            SysFunction.path == url
+            SysUser.id == 2,
+            SysFunction.path == "/user/{id}"
         )
     )
+    db.commit()
+    print("toi da zo day roi ne")
     return auth_query is None

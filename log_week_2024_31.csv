@@ -1,0 +1,6 @@
+action_datetime,path_name,method,ip,status_response,response,request_body,request_query,duration
+2024-07-31 15:06:32,/users/{id},GET,127.0.0.1,200,"{""phone"":""0987654321"",""email"":""user@example.com"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438"",""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1}","{
+    ""test"":""oik"",
+    ""t1"":123,
+
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.00540924072265625

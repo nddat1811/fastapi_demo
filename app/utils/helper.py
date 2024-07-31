@@ -1,7 +1,8 @@
 import random
 from datetime import datetime
 
-from app.utils.constants import URL_PATH
+from app.constant.log import URL_PATH_NOT_AUTHEN
+
 
 # Generate random 6 digits to create code
 def generate_code():
@@ -17,9 +18,5 @@ def convert_date(data):
     
     return data
 
-
-def is_not_authen(url: str) -> bool:
-    print("t:", url) 
-    # return url in URL_PATH
-    return True
-    return False
+def is_path_not_check_authentication(url: str)->bool:
+    return URL_PATH_NOT_AUTHEN.get(url, False)

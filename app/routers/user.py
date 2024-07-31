@@ -4,13 +4,12 @@ from fastapi import APIRouter, Depends, HTTPException, Request, status
 from app.auth.oauth2 import RoleChecker, get_current_user
 from app.models import user
 from app.models.user import SysUser
-from app.schemas.user import CheckCodePasswordRequest, ForgotPasswordRequest, UpdateRoleRequest, UpdateUserRequest, UserDisplay, UserResetPasswordRequest, ResetPasswordResponse
+from app.schemas.user import CheckCodePasswordRequest, ForgotPasswordRequest,  UpdateUserRequest, UserDisplay, UserResetPasswordRequest, ResetPasswordResponse
 from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.db import db_user
 from fastapi.templating import Jinja2Templates
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
-from app.utils.constants import Role
 from app.utils.helper import generate_code
 
 router = APIRouter(
@@ -48,7 +47,7 @@ async def update_current_user(update_user_request: UpdateUserRequest, db : Sessi
     return await db_user.update_current_user(update_user_request, current_user, db)
 
 @router.delete('/{id}')
-async def delete_user( id: int, db: Session = Depends(get_db), _: bool = Depends(RoleChecker([Role.ADMIN]))):
+async def delete_user( id: int, db: Session = Depends(get_db) ):
     return await db_user.delete_user(id, db)
 
 # Forgot password

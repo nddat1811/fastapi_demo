@@ -13,4 +13,3 @@ jinja2
 fastapi-mail
 openpyxl
 
-pip install git+https://github.com/dinhitcom/svg-captcha-solver
