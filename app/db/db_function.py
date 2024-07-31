@@ -14,8 +14,7 @@ from datetime import timedelta, datetime
 from app.models import SysUser
 
 
-def is_authentication(user_id: int, url: str, db : Session) -> bool:
-    print("---------------------------\n\n\n\n\n")
+async def is_authentication(user_id: int, url: str, db : Session):
     auth_query = (
         db.query(SysUser)
         .join(SysUserRole, SysUser.id == SysUserRole.user_id)
@@ -24,9 +23,7 @@ def is_authentication(user_id: int, url: str, db : Session) -> bool:
         .join(SysFunction, SysRoleFunction.function_id == SysFunction.id)
         .filter(
             SysUser.id == 2,
-            SysFunction.path == "/user/{id}"
-        )
+            SysFunction.path == url
+        ).first()
     )
-    db.commit()
-    print("toi da zo day roi ne")
-    return auth_query is None
+    return auth_query is not None

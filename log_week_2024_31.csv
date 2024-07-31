@@ -4,3 +4,149 @@ action_datetime,path_name,method,ip,status_response,response,request_body,reques
     ""t1"":123,
 
 }","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.00540924072265625
+2024-07-31 15:26:17,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""email"":""user@example.com"",""phone"":""0987654321"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}","{
+    ""test"":""oik"",
+    ""t1"":123,
+    ""image"": ""data:image/jpeg;base64,/9j/4AAQSkZJR""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.013211488723754883
+2024-07-31 15:26:31,/auth/login,POST,127.0.0.1,200,"{""access_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbl91c2VyIiwiZXhwIjoxNzIyNDE1MjkxfQ.xROQ1TeE6_EfRKlggqiwXyQHKo1W0wRWAf9I3AzHjGw"",""request_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbl91c2VyIiwiZXhwIjoxNzIzMDE5MTkxfQ.uvHB2MqUx_dur8KfPJ4x4A1_OAcNpaHvmew2AKrL2mU"",""token_type"":""bearer""}","
+
+
+
+
+
+
+
+{
+    ""username"":""admin_user"",
+    ""password"":""hashed_password_1""
+}","{'path': {}, 'query': {}}",0.009777069091796875
+2024-07-31 15:26:33,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""email"":""user@example.com"",""phone"":""0987654321"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}","{
+    ""test"":""oik"",
+    ""t1"":123,
+    ""image"": ""data:image/jpeg;base64,/9j/4AAQSkZJR""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.00627446174621582
+2024-07-31 15:27:05,/users/{id},GET,127.0.0.1,200,"{""email"":""user@example.com"",""phone"":""0987654321"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438"",""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1}","{
+    ""test"":""oik"",
+    ""t1"":123
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.026884794235229492
+2024-07-31 15:27:29,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""email"":""user@example.com"",""phone"":""0987654321"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}","{
+    ""test"":""oik"",
+    ""t1"":123
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.017299413681030273
+2024-07-31 15:28:03,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""phone"":""0987654321"",""email"":""user@example.com"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}","{
+    ""test"":""oik"",
+    ""t1"":123
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.017497777938842773
+2024-07-31 15:29:08,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""email"":""user@example.com"",""phone"":""0987654321"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}","{
+    ""test"":""oik"",
+    ""t1"":123
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.01609635353088379
+2024-07-31 15:29:33,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""email"":""user@example.com"",""phone"":""0987654321"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}","{
+    ""test"":""oik"",
+    ""t1"":123
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.013962984085083008
+2024-07-31 15:40:03,/users/{id},GET,127.0.0.1,200,"{""username"":""regular_user"",""hash_password"":""hashed_password_2"",""id"":2,""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""email"":""user@example.com"",""phone"":""0987654321"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}","{
+    ""test"":""oik"",
+    ""t1"":123
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.022432565689086914
+2024-07-31 15:43:22,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""phone"":""0987654321"",""email"":""user@example.com"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}","{
+    ""test"":""oik"",
+    ""t1"":123
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.013817310333251953
+2024-07-31 15:43:49,/auth/login,POST,127.0.0.1,200,"{""access_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbl91c2VyIiwiZXhwIjoxNzIyNDE2MzI5fQ.w81PN_E_kWozqGbL_VLtrbBm0Vckl1sTrWR9a5yFQF0"",""request_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbl91c2VyIiwiZXhwIjoxNzIzMDIwMjI5fQ.Ln3YjoDmSnd7TjXzgBu38s2YLMgIzY9W_m2_z-2KeBc"",""token_type"":""bearer""}","
+
+
+
+
+
+
+
+{
+    ""username"":""admin_user"",
+    ""password"":""hashed_password_1""
+}","{'path': {}, 'query': {}}",0.007998228073120117
+2024-07-31 15:43:51,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""phone"":""0987654321"",""email"":""user@example.com"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}","{
+    ""test"":""oik"",
+    ""t1"":123
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.007233858108520508
+2024-07-31 15:44:35,/auth/login,POST,127.0.0.1,200,"{""access_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE3MjI0MTYzNzV9.qPszJjkOEEp_qNTyAT9PKM6pv7FkCnNJHsOCP-mEy6Y"",""request_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE3MjMwMjAyNzV9.DBIMOM105WcnuNdQRi6A2gl6VdKaG3mXMRerhEwLmWI"",""token_type"":""bearer""}","{
+    ""username"":""string"",
+    ""password"":""string""
+}
+
+
+
+
+
+
+
+","{'path': {}, 'query': {}}",0.00999307632446289
+2024-07-31 15:44:39,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""phone"":""0987654321"",""email"":""user@example.com"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}","{
+    ""test"":""oik"",
+    ""t1"":123
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.008269309997558594
+2024-07-31 15:46:54,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""phone"":""0987654321"",""email"":""user@example.com"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}","{
+    ""test"":""oik"",
+    ""t1"":123
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.012327432632446289
+2024-07-31 15:47:14,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""email"":""user@example.com"",""phone"":""0987654321"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}","{
+    ""test"":""oik"",
+    ""t1"":123
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.013141870498657227
+2024-07-31 15:47:40,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""phone"":""0987654321"",""email"":""user@example.com"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}","{
+    ""test"":""oik"",
+    ""t1"":123
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.01854705810546875
+2024-07-31 15:47:58,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""email"":""user@example.com"",""phone"":""0987654321"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}","{
+    ""test"":""oik"",
+    ""t1"":123
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.013371706008911133
+2024-07-31 15:48:22,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""email"":""user@example.com"",""phone"":""0987654321"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}","{
+    ""test"":""oik"",
+    ""t1"":123
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.014334440231323242
+2024-07-31 15:52:30,/users/{id},GET,127.0.0.1,200,"{""phone"":""0987654321"",""email"":""user@example.com"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438"",""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1}","{
+    ""test"":""oik"",
+    ""t1"":123
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.018088340759277344
+2024-07-31 15:55:49,/auth/login,POST,127.0.0.1,200,"{""access_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWd1bGFyX3VzZXIiLCJleHAiOjE3MjI0MTcwNDl9.a7LzmJ5rJeBA5HWOfvJa7tc_yPEy4imeucC3UcA_W6U"",""request_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWd1bGFyX3VzZXIiLCJleHAiOjE3MjMwMjA5NDl9.rSFD25HIqxQnQEQBcqmZ9X99jy88MEUOBJODOvhkpKs"",""token_type"":""bearer""}","
+
+
+
+{
+    ""username"":""regular_user"",
+    ""password"":""hashed_password_1""
+}
+
+
+
+","{'path': {}, 'query': {}}",0.0518193244934082
+2024-07-31 15:58:46,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""phone"":""0987654321"",""email"":""user@example.com"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}","{
+    ""test"":""oik"",
+    ""t1"":123
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.01558232307434082
+2024-07-31 15:59:28,/auth/login,POST,127.0.0.1,200,"{""access_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWd1bGFyX3VzZXIiLCJleHAiOjE3MjI0MTcyNjh9.37pVuzadrzP0Z9v3gS43gye2Az5EssdZQA9qssfMzP8"",""request_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWd1bGFyX3VzZXIiLCJleHAiOjE3MjMwMjExNjh9.pRupEDpT8XQmBgq4BxVbVznQrLnUTOufivofUApUrFk"",""token_type"":""bearer""}","
+
+
+
+{
+    ""username"":""regular_user"",
+    ""password"":""hashed_password_1""
+}
+
+
+
+","{'path': {}, 'query': {}}",0.045281410217285156
+2024-07-31 16:00:10,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""phone"":""0987654321"",""email"":""user@example.com"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}","{
+    ""test"":""oik"",
+    ""t1"":123
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.012961387634277344
+2024-07-31 16:00:29,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""email"":""user@example.com"",""phone"":""0987654321"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}","{
+    ""test"":""oik"",
+    ""t1"":123
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.011875629425048828
+2024-07-31 16:06:44,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""phone"":""0987654321"",""email"":""user@example.com"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}","{
+    ""test"":""oik"",
+    ""t1"":123
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.01649785041809082

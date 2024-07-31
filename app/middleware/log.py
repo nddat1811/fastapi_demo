@@ -47,22 +47,6 @@ class LoggingMiddleware(BaseHTTPMiddleware):
         start_time = time.time()
         request_body = await request.body()
         
-        # Log request details
-        # logger.warning(f"Request: {request.method} {request.url.path} from {request.client.host}")
-        
-        # if(is_not_authen(request.url.path)):
-        #     try:
-        #         token = request.headers.get('Authorization').split(" ")[1]
-        #         current_user: SysUser = await get_current_user(token, db)
-        #         user_info = f"User: {current_user.id}"
-        #         print(request.url.path)    
-        #         # t = is_authentication(current_user.id, request.url.path, db)
-        #     except Exception as e:
-        #         user_info = "User: Unauthenticated"
-        #         logger.error(f"Authentication error: {str(e)}")
-        # else:
-        #     print('con lai in ra')
-        
         response = await call_next(request)
         
         process_time = time.time() - start_time
@@ -71,9 +55,15 @@ class LoggingMiddleware(BaseHTTPMiddleware):
 
         # if base64, file, OPTIONS method, some urls --> not write log --> return response 
         if self.is_not_write_log(request=request, request_body=request_body):  
+            print("k ghi log")
             return response
         #response
-        print("auth: ", await check_authentication(request=request, db=db, original_path=original_path))
+        if not await check_authentication(request=request, db=db, original_path=original_path):
+            return Response(
+                status_code=403, 
+                content=json.dumps({"detail": "Bạn không có quyền sử dụng tính năng này"}), 
+                media_type="application/json"
+            )
         body_iterator = response.body_iterator
         body = b"".join([section async for section in body_iterator])
         body_str = body.decode()
