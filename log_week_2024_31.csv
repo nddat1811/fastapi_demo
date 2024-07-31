@@ -119,3 +119,129 @@ action_datetime,path_name,method,ip,status_response,response,description,request
 
 ","{'path': {}, 'query': {}}",0.003
 2024-07-31 21:14:51,/auth/login,POST,127.0.0.1,200,"{""access_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE3MjI0MzYxOTF9.u0SCDzOo3yetWttLQD3djFUewDXMOCjzNSvwxrr6-0c"",""request_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE3MjMwNDAwOTF9.VopLHe7bDIHPAfvrVi_jTkXWAL9oRStQ5JgY_5CSxMg"",""token_type"":""bearer""}",,"{""username"": ""string""}","{'path': {}, 'query': {}}",0.008
+2024-07-31 21:27:02,/auth/login,POST,127.0.0.1,200,"{""access_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE3MjI0MzY5MjJ9.02PD-UodGPws3zeqizkACJD5X1WJ2I05n4Kky6jkvFQ"",""request_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE3MjMwNDA4MjJ9.gtF4AEwqdH-yfg9dXG1wbOVVQu-GdhBi3JkJOL0cDlw"",""token_type"":""bearer""}",,"{""username"": ""string""}","{'path': {}, 'query': {}}",0.02
+2024-07-31 21:27:11,/users/{id},GET,127.0.0.1,500,{'detail': 'Internal Server Error'},'charmap' codec can't encode character '\u1ea1' in position 66: character maps to <undefined>,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.007
+2024-07-31 21:29:17,/users/{id},GET,127.0.0.1,500,{'detail': 'Internal Server Error'},'charmap' codec can't encode character '\u1ea1' in position 66: character maps to <undefined>,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.013
+2024-07-31 21:29:48,/users/{id},GET,127.0.0.1,500,{'detail': 'Internal Server Error'},'charmap' codec can't encode character '\u1ea1' in position 66: character maps to <undefined>,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.015
+2024-07-31 21:30:39,/users/{id},GET,127.0.0.1,500,{'detail': 'Internal Server Error'},'charmap' codec can't encode character '\u1ea1' in position 66: character maps to <undefined>,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.014
+2024-07-31 21:32:24,/users/{id},GET,127.0.0.1,500,{'detail': 'Internal Server Error'},'charmap' codec can't encode character '\u1ea1' in position 66: character maps to <undefined>,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.029
+2024-07-31 21:32:52,/users/{id},GET,127.0.0.1,403,body_str,,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.021
+2024-07-31 21:33:25,/users/{id},GET,127.0.0.1,403,body_str,,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.012
+2024-07-31 21:34:12,/users/{id},GET,127.0.0.1,403,body_str,,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""adsads
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.014
+2024-07-31 21:34:34,/auth/login,POST,127.0.0.1,200,body_str,,"{""username"": ""string""}","{'path': {}, 'query': {}}",0.006
+2024-07-31 21:34:37,/auth/login,POST,127.0.0.1,400,body_str,,"{
+    ""username"":""string"",
+    ""password"":""string""�dasd
+}
+
+
+
+
+
+
+
+","{'path': {}, 'query': {}}",0.001
+2024-07-31 21:35:09,/auth/login,POST,127.0.0.1,400,body_str,,"{
+    ""username"":""string"",
+    ""password"":""string""�dasd
+}
+
+
+
+
+
+
+
+","{'path': {}, 'query': {}}",0.002
+2024-07-31 21:35:39,/users/{id},GET,127.0.0.1,403,body_str,,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.015
+2024-07-31 21:35:52,/users/{id},GET,127.0.0.1,403,body_str,,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.02
+2024-07-31 21:36:06,/users/{id},GET,127.0.0.1,500,{'detail': 'Internal Server Error'},'charmap' codec can't encode character '\u1ea1' in position 66: character maps to <undefined>,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.019
+2024-07-31 21:37:05,/users/{id},GET,127.0.0.1,500,{'detail': 'Internal Server Error'},'charmap' codec can't encode character '\u1ea1' in position 66: character maps to <undefined>,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.015
+2024-07-31 21:37:56,/users/{id},GET,127.0.0.1,403,"{""detail"":""Bạn không có quyền sử dụng tính năng này""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.016
+2024-07-31 21:43:36,/users/{id},GET,127.0.0.1,403,"{""detail"":""Bạn không có quyền sử dụng tính năng này""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.005
+2024-07-31 21:48:52,/users/{id},GET,127.0.0.1,403,"{""detail"":""Bạn không có quyền sử dụng tính năng này""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.02
+2024-07-31 21:48:52,/users/{id},GET,127.0.0.1,403,"{""detail"":""Bạn không có quyền sử dụng tính năng này""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.02
+2024-07-31 21:49:10,/users/{id},GET,127.0.0.1,403,"{""detail"":""Bạn không có quyền sử dụng tính năng này""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.014
+2024-07-31 21:49:10,/users/{id},GET,127.0.0.1,403,"{""detail"":""Bạn không có quyền sử dụng tính năng này""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.014
+2024-07-31 21:50:23,/users/{id},GET,127.0.0.1,403,"{""detail"":""Bạn không có quyền sử dụng tính năng này""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.013
+2024-07-31 21:50:23,/users/{id},GET,127.0.0.1,403,"{""detail"":""Bạn không có quyền sử dụng tính năng này""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.013
+2024-07-31 21:50:40,/users/{id},GET,127.0.0.1,403,"{""detail"":""Bạn không có quyền sử dụng tính năng này""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.016
+2024-07-31 21:50:40,/users/{id},GET,127.0.0.1,403,"{""detail"":""Bạn không có quyền sử dụng tính năng này""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.016
+2024-07-31 21:52:11,/users/{id},GET,127.0.0.1,403,"{""detail"":""Bạn không có quyền sử dụng tính năng này""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.014
+2024-07-31 21:52:11,/users/{id},GET,127.0.0.1,403,"{""detail"":""Bạn không có quyền sử dụng tính năng này""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.014
+2024-07-31 21:52:34,/users/{id},GET,127.0.0.1,403,"{""detail"":""Bạn không có quyền sử dụng tính năng này""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.014

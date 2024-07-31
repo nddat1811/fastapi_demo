@@ -16,9 +16,9 @@ def write_log_csv(req: LogModel):
     today = datetime.now()
     filename = get_csv_filename(today)
     
-    # Kiểm tra nếu file không tồn tại, tạo mới và ghi header
+    # Check file is already exists, if not create new file
     if not os.path.exists(filename):
-        with open(filename, mode='w', newline='') as file:
+        with open(filename, mode='a', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
             writer.writerow([
                 "action_datetime", "path_name", "method", "ip", 
@@ -26,8 +26,8 @@ def write_log_csv(req: LogModel):
                 "request_query", "duration"
             ])
     
-    # Ghi log vào file CSV
-    with open(filename, mode='a', newline='') as file:
+    # write log into csv
+    with open(filename, mode='a', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
         writer.writerow([
             req.action_datetime.strftime("%Y-%m-%d %H:%M:%S"), 
@@ -35,4 +35,3 @@ def write_log_csv(req: LogModel):
             req.description, req.request_body, req.request_query, req.duration
         ])
 
-# Ví dụ ghi log

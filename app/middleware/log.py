@@ -35,8 +35,9 @@ class LoggingMiddleware(BaseHTTPMiddleware):
         if URL_PATH_NOT_WRITE_LOG.get(request.url.path, False) or request.method == 'OPTIONS' or "multipart/form-data" in request.headers.get("content-type", "") or self.is_base64(request_body):
             return True
         return False
-    def print_log(self, request, request_body, original_path):
+    def print_log_request(self, request, request_body, original_path):
         logger.info(
+            f"\nREQUEST"
             f"\n{request.method} request to {request.url} metadata\n"
             # f"\path: {request.url.path}\n"
             f"\tBody: {request_body}\n"
@@ -49,20 +50,20 @@ class LoggingMiddleware(BaseHTTPMiddleware):
                 status_code:int, body_str: str, process_time: float, error_message=None):
         # Combine query params and path params
         combined_params = self.combine_params(request=request)
-        #define model to write log files
-        print("body: ", body_str)
+        # real ip not ip proxy or nginx
         client_ip = await self.get_real_ip(request)
+        #define model to write log files
         log_entry = LogModel(
             action_datetime=datetime.now(),
             path_name=original_path,
             method=request.method,
             ip=client_ip,
             status_response=status_code,
-            response=body_str if error_message is None else error_message,
+            response=body_str,
             duration=round(process_time, 3),
             request_body=request_body,
             request_query= combined_params,
-            description=None
+            description=None if error_message is None else error_message
         )
         
         #write log csv
@@ -80,6 +81,13 @@ class LoggingMiddleware(BaseHTTPMiddleware):
                 return request.headers[header].split(",")[0].strip()
 
         return request.client.host
+
+    def print_log_response(self, status_code, response):
+        logger.info(
+            f"\n RESPONSE \n"
+            f"Status code: {status_code}\n"
+            f"Response: {response}\n"
+            )
     async def dispatch(self, request: Request, call_next):
         flag = True
         db: Session = next(get_db())
@@ -87,6 +95,7 @@ class LoggingMiddleware(BaseHTTPMiddleware):
         request_body = await request.body()
         response = await call_next(request)
         process_time = time.time() - start_time
+        error_message = None
         try:
             original_path = self.get_original_path(request.scope.get('route'))
             # if base64, file, OPTIONS method, some urls --> not write log --> return response 
@@ -107,34 +116,32 @@ class LoggingMiddleware(BaseHTTPMiddleware):
                     request_body_json.pop("password", None)
                     request_body = json.dumps(request_body_json)
                 except json.JSONDecodeError:
-                    # response.status_code = 500
                     flag = False
                     response = JSONResponse(
-                        status_code=400,
-                        content={"detail": "Invalid JSON format"}
+                        status_code=status.HTTP_400_BAD_REQUEST,
+                        content={"detail": "JSON format không hợp lệ"}
                     )
             body_str = str("")
             if flag:
                 body_iterator = response.body_iterator
                 body = b"".join([section async for section in body_iterator])
-                body_str = body.decode()
+                body_str = body.decode('utf-8', errors='replace')
                 response = Response(content=body_str, status_code=response.status_code, headers=dict(response.headers))
             else:
-                body_str = str(response.body.decode())
+                body_str = response.body.decode('utf-8', errors='replace')
             #print log to screen
-            # self.print_log(request=request, request_body=request_body, original_path=original_path)
-            # write log to csv and db
-            await self.write_log(db=db, request=request, request_body=request_body, 
-                        original_path=original_path, status_code=response.status_code,
-                        body_str=body_str, process_time=process_time, error_message=None)
-            return response
+            self.print_log_request(request=request, request_body=request_body, original_path=original_path)
         except Exception as e:
             error_message = str(e)
-            await self.write_log(db=db, request=request, request_body=request_body, 
-                        original_path=original_path, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                        body_str=str({"detail": "Internal Server Error"}), 
-                        process_time=process_time, error_message=error_message)
-            return JSONResponse(
-                status_code=500,
-                content={"detail": "Internal Server Error"}
+            body_str=str({"detail": "Lỗi hệ thống"})
+            response =  JSONResponse(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                content={"detail": "Lỗi hệ thống"}
             )
+        finally:
+            # write log to csv and db
+            await self.write_log(db=db, request=request, request_body=request_body, 
+                original_path=original_path, status_code=response.status_code,
+                body_str=body_str, process_time=process_time, error_message=error_message)
+            self.print_log_response(status_code=response.status_code, response=body_str)
+            return response
