@@ -7,6 +7,7 @@ from ..db.database import get_db
 from jose import JWTError, jwt
 from app.db import db_user
 from ..models.user import SysUser
+from fastapi.responses import JSONResponse
 
 oauth2_bearer = OAuth2PasswordBearer(tokenUrl='auth/login')
 
@@ -23,12 +24,24 @@ credentials_exception = HTTPException(
 
 #Get current user
 async def get_current_user(token : str = Depends(oauth2_bearer), db : Session = Depends(get_db)) -> SysUser:
-    username = extract_claim(claim_type = 'sub', token=token)
-    user = await db_user.get_user_by_username(username, db)
-    
-    if user is None: 
+    try:
+        username = extract_claim(claim_type = 'sub', token=token)
+        user = await db_user.get_user_by_username(username, db)
+        if user is None: 
+            raise credentials_exception
+        return user
+    except Exception as e:
         raise credentials_exception
-    return user
+
+def extract_claim(claim_type : str, token : str):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        claim : str = payload.get(claim_type)
+        if claim is None:
+            raise credentials_exception
+    except JWTError as e:
+        raise credentials_exception
+    return claim
 
 #Create access token
 def create_token(claims: dict, expire_delta_time : Optional[timedelta] = None):
@@ -44,27 +57,3 @@ def create_token(claims: dict, expire_delta_time : Optional[timedelta] = None):
     jwt_token = jwt.encode(to_encode, SECRET_KEY, ALGORITHM)
 
     return jwt_token
-
-def extract_claim(claim_type : str, token : str):
-    try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        claim : str = payload.get(claim_type)
-        if claim is None:
-            raise credentials_exception
-        
-    except JWTError:
-        print('decode error')
-        raise credentials_exception
-    return claim
-
-class RoleChecker:
-  def __init__(self, allowed_roles):
-    self.allowed_roles = allowed_roles
-
-  def __call__(self, user: SysUser = Depends(get_current_user)):
-    if user.role in self.allowed_roles:
-        return True
-    raise HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED, 
-        detail="You don't have enough permissions"
-        )

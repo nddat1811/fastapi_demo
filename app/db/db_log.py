@@ -13,6 +13,7 @@ class LogModel(BaseModel):
     response: str
     request_body: Optional[str]
     request_query: Optional[str]
+    description: Optional[str]
     duration: float
     
     
@@ -26,6 +27,7 @@ def write_log_DB(req: LogModel, db : Session):
         response=req.response,
         request_body=req.request_body,
         request_query=req.request_query,
+        description= req.description,
         duration=req.duration
     )
 

@@ -1,7 +1,7 @@
 
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, Request, status
-from app.auth.oauth2 import RoleChecker, get_current_user
+from app.auth.oauth2 import  get_current_user
 from app.models import user
 from app.models.user import SysUser
 from app.schemas.user import CheckCodePasswordRequest, ForgotPasswordRequest,  UpdateUserRequest, UserDisplay, UserResetPasswordRequest, ResetPasswordResponse

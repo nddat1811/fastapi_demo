@@ -22,7 +22,7 @@ def write_log_csv(req: LogModel):
             writer = csv.writer(file)
             writer.writerow([
                 "action_datetime", "path_name", "method", "ip", 
-                "status_response", "response", "request_body", 
+                "status_response", "response", "description", "request_body", 
                 "request_query", "duration"
             ])
     
@@ -31,8 +31,8 @@ def write_log_csv(req: LogModel):
         writer = csv.writer(file)
         writer.writerow([
             req.action_datetime.strftime("%Y-%m-%d %H:%M:%S"), 
-            req.path_name, req.method, req.ip, req.status_response, 
-            req.response, req.request_body, req.request_query, req.duration
+            req.path_name, req.method, req.ip, req.status_response, req.response, 
+            req.description, req.request_body, req.request_query, req.duration
         ])
 
 # Ví dụ ghi log

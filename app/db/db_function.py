@@ -22,7 +22,7 @@ async def is_authentication(user_id: int, url: str, db : Session):
         .join(SysRoleFunction, SysRole.id == SysRoleFunction.role_id)
         .join(SysFunction, SysRoleFunction.function_id == SysFunction.id)
         .filter(
-            SysUser.id == 2,
+            SysUser.id == user_id,
             SysFunction.path == url
         ).first()
     )

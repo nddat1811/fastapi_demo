@@ -5,11 +5,13 @@ from app.db.db_function import is_authentication
 from app.models.user import SysUser
 from app.utils.helper import is_path_not_check_authentication
 from sqlalchemy.orm import Session
+from fastapi import HTTPException
+from fastapi import  HTTPException, status
 
-
-async def check_authentication(request: Request, db: Session, original_path: str) -> bool:
+async def check_authentication(request: Request, db: Session, original_path: str):
     if(is_path_not_check_authentication(original_path)):
         return True
+
     else:
         try:
             token = request.headers.get('Authorization').split(" ")[1]
