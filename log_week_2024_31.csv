@@ -354,3 +354,50 @@ action_datetime,path_name,method,ip,status_response,response,description,request
 2024-08-01 08:28:32,/auth/login,POST,127.0.0.1,200,"{""access_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE3MjI0NzY2MTJ9.rTGWrY7fMOC36YYTWJVFyWsCGyIPIF6siJhFRL3HaiM"",""request_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE3MjMwODA1MTJ9.eH4Vj62IjlZDswewo4h0O4qQ-R1eBX3nZAIllzl-Qfs"",""token_type"":""bearer""}",,"{""username"": ""string""}","{'path': {}, 'query': {}}",0.011
 2024-08-01 08:29:45,/auth/login,POST,127.0.0.1,503,"{""detail"":""Looix asd""}",,"{""username"": ""string""}","{'path': {}, 'query': {}}",0.002
 2024-08-01 08:30:07,/auth/login,POST,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},"{""detail"":""Looix asd""}","{""username"": ""string""}","{'path': {}, 'query': {}}",0.002
+2024-08-01 08:33:40,/auth/login,POST,127.0.0.1,200,"{""access_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE3MjI0NzY5MjB9.eN9O-kTxxNFtl7TZBIOE0YUVnyGh4jkO6cSWP9ymd1g"",""request_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE3MjMwODA4MjB9.JFjo1KXmFPjIYVI9k2MIZkOmvZovhTJJfJil5aZHQEY"",""token_type"":""bearer""}",,"{""username"": ""string""}","{'path': {}, 'query': {}}",0.016
+2024-08-01 08:33:48,/users/{id},GET,127.0.0.1,403,"{""detail"":""Bạn không có quyền sử dụng tính năng này""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.008
+2024-08-01 08:33:59,/auth/login,POST,127.0.0.1,400,"{""detail"":""JSON format không hợp lệ""}",,"
+
+
+
+{
+    ""username"":""regular_user"",
+    ""password"":""hashed_password_1""ấd
+}
+
+
+
+","{'path': {}, 'query': {}}",0.001
+2024-08-01 08:34:04,/auth/login,POST,127.0.0.1,200,"{""access_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWd1bGFyX3VzZXIiLCJleHAiOjE3MjI0NzY5NDR9.JU4ngBzzLNM0Pru3yLUrAc8f0SkzHrnh8B_mgz0N1-o"",""request_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWd1bGFyX3VzZXIiLCJleHAiOjE3MjMwODA4NDR9.BvY2Mdj8nIv5mOxySnTeBKuNQp7HA-kmh_yj-IRDpHI"",""token_type"":""bearer""}",,"{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.009
+2024-08-01 08:34:06,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},500: TESST token,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.007
+2024-08-01 08:34:52,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},500: TESST token,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.024
+2024-08-01 08:35:02,/auth/login,POST,127.0.0.1,200,"{""access_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWd1bGFyX3VzZXIiLCJleHAiOjE3MjI0NzcwMDJ9.MyDVT06AH82yKKCT5tRMmsVBxN2n3WR7dq3VH_dbj18"",""request_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWd1bGFyX3VzZXIiLCJleHAiOjE3MjMwODA5MDJ9.u4WJkRkv6VYieQKy-h_DS2E-7-JI6sZnQGQigr4-KIY"",""token_type"":""bearer""}",,"{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.011
+2024-08-01 08:35:05,/users/{id},GET,127.0.0.1,200,"{""phone"":""0987654321"",""email"":""user@example.com"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438"",""id"":2,""username"":""regular_user"",""hash_password"":""hashed_password_2"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.006
+2024-08-01 08:35:34,/hiu,GET,127.0.0.1,403,"{""detail"":""Bạn không có quyền sử dụng tính năng này""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {}, 'query': {}}",0.001
+2024-08-01 08:37:52,/auth/login,POST,127.0.0.1,400,"{""detail"":""JSON format không hợp lệ""}",,"
+
+
+
+{
+    ""username"":""regular_user"",
+    ""password"":""hashed_password_1""ádads
+}
+
+
+
+","{'path': {}, 'query': {}}",0.001
