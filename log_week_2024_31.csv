@@ -703,3 +703,7 @@ action_datetime,path_name,method,ip,status_response,response,description,request
     ""test"":""oik"",
     ""t1"":""123sadads""
 }","{'path': {}, 'query': {}}",0.0
+2024-08-01 11:09:25,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},"""500: 401: invalidate token""","{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {}, 'query': {}}",0.0

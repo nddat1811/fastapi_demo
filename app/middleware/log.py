@@ -48,12 +48,12 @@ class LoggingMiddleware(BaseHTTPMiddleware):
         if(type(s) == str):
             s = s.encode()
         return b"base64" in s
-    async def write_log(self,  db: Session, request: Request, request_body: str, original_path: str,   
+    def write_log(self,  db: Session, request: Request, request_body: str, original_path: str,   
                 status_code:int, body_str: str, process_time: float, error_message=None):
         # Combine query params and path params
         combined_params = self.combine_params(request=request)
         # real ip not ip proxy or nginx
-        client_ip = await self.get_real_ip(request)
+        client_ip = self.get_real_ip(request)
         #define model to write log files
         log_entry = LogModel(
             action_datetime=datetime.now(),
@@ -72,7 +72,7 @@ class LoggingMiddleware(BaseHTTPMiddleware):
         write_log_csv(log_entry)
         #write log database
         write_log_DB(log_entry, db)
-    async def get_real_ip(self, request: Request) -> str:
+    def get_real_ip(self, request: Request) -> str:
         headers_to_check = [
             "X-Forwarded-For",
             "X-Real-IP"
@@ -92,44 +92,22 @@ class LoggingMiddleware(BaseHTTPMiddleware):
             f"Error message: {error_message}\n"
             )
     
-    # async def handle_write_log(
-    #     self, flag, response, error_message, request, request_body, original_path, start_time, process_time
-    #     # request: Request,
-    #     # response: Response,
-    #     # request_body: str,
-    #     # original_path: str,
-    #     # start_time: float,
-    #     # db,
-    #     # process_time: float,
-    #     # flag: bool,
-    #     # background_tasks: BackgroundTasks
-    # ):
-    #     # error_message = ""
-    #     if flag:
-    #         body_iterator = response.body_iterator
-    #         body = b"".join([section async for section in body_iterator])
-    #         body_str = body.decode('utf-8', errors='replace')
-    #         response = Response(content=body_str, status_code=response.status_code, headers=dict(response.headers))
-    #     else:
-    #         body_str = response.body.decode('utf-8', errors='replace')
-
-    #     if response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
-    #         error_message = body_str
-    #         body_str = str({"detail": "Lỗi hệ thống"})
-    #         response = JSONResponse(
-    #             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-    #             content={"detail": "Lỗi hệ thống"}
-    #         )
-    #     self.print_log_request(request=request, request_body=request_body, original_path=original_path, start_time=start_time)
+    async def handle_write_log(
+        self, response, error_message, request, request_body, original_path, start_time, process_time, body_str, db
+    ):
+        self.print_log_request(request=request, request_body=request_body, original_path=original_path, start_time=start_time)
             
-    #     # print("body:", body_str)
-    #     # write log to csv and db
-    #     await self.write_log(db=db, request=request, request_body=request_body, 
-    #             original_path=original_path, status_code=response.status_code,
-    #             body_str=body_str, process_time=process_time, error_message=error_message)
-    #     self.print_log_response(status_code=response.status_code, response=body_str[:LENGTH_RESPONSE], error_message=error_message)
-
-    async def dispatch(self, request: Request, call_next, background_tasks: BackgroundTasks):
+        # print("body:", body_str)
+        # write log to csv and db
+        self.write_log(db=db, request=request, request_body=request_body, 
+                original_path=original_path, status_code=response.status_code,
+                body_str=body_str, process_time=process_time, error_message=error_message)
+        self.print_log_response(status_code=response.status_code, response=body_str[:LENGTH_RESPONSE], error_message=error_message)
+    async def test(self, flag, response, error_message, request, request_body, original_path, start_time, process_time, db, background_tasks: BackgroundTasks):
+        background_tasks.add_task(await self.handle_write_log, flag, response, 
+                error_message, request, request_body, original_path, start_time, process_time, db)
+        return 0
+    async def dispatch(self, request: Request, call_next):
         process_time = 0
         error_message = None
         body_str = str("")
@@ -177,7 +155,6 @@ class LoggingMiddleware(BaseHTTPMiddleware):
                 content=error_message
             )
         finally:
-            # background_tasks.add_task(await self.handle_write_log, flag, response, error_message)
             if flag:
                 body_iterator = response.body_iterator
                 body = b"".join([section async for section in body_iterator])
@@ -185,20 +162,15 @@ class LoggingMiddleware(BaseHTTPMiddleware):
                 response = Response(content=body_str, status_code=response.status_code, headers=dict(response.headers))
             else:
                 body_str = response.body.decode('utf-8', errors='replace')
-            # print("errr: ", response.status_code)
+
             if response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
                 error_message = body_str
-                body_str=str({"detail": "Lỗi hệ thống"})
-                response =  JSONResponse(
+                body_str = str({"detail": "Lỗi hệ thống"})
+                response = JSONResponse(
                     status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                     content={"detail": "Lỗi hệ thống"}
                 )
-            self.print_log_request(request=request, request_body=request_body, original_path=original_path, start_time=start_time)
-            
-            print("body:", body_str)
-            #write log to csv and db
-            await self.write_log(db=db, request=request, request_body=request_body, 
-                original_path=original_path, status_code=response.status_code,
-                body_str=body_str, process_time=process_time, error_message=error_message)
-            self.print_log_response(status_code=response.status_code, response=body_str[:LENGTH_RESPONSE], error_message=error_message)
+            background_tasks = BackgroundTasks()
+            background_tasks.add_task(self.handle_write_log, response, error_message, request, request_body, original_path, start_time, process_time, body_str, db)
+            response.background = background_tasks
             return response
