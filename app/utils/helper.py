@@ -1,5 +1,5 @@
 import random
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from app.constant.log import URL_PATH_NOT_AUTHEN
 
@@ -20,3 +20,10 @@ def convert_date(data):
 
 def is_path_not_check_authentication(url: str)->bool:
     return URL_PATH_NOT_AUTHEN.get(url, False)
+def convert_utc_to_local_time(time: datetime):
+    utc_datetime = datetime.utcfromtimestamp(time)
+
+        # Add a timezone offset of +7 hours
+    timezone_offset = timedelta(hours=7)
+    local_datetime = utc_datetime + timezone_offset
+    return local_datetime

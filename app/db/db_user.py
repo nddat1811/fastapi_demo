@@ -37,10 +37,9 @@ async def is_email_non_exist(email: str, db : Session) -> bool:
 
 async def login(request: OAuth2PasswordRequestForm, db: Session) -> AuthResponse:
     # raise HTTPException(
-    #         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-    #         detail=f"Looix asd"
-    #     )
-
+    #     status_code=status.HTTP_400_BAD_REQUEST,
+    #     detail=f"Looix asd"
+    # )
     try:
         # Simulate an error to always trigger the except block
         # raise ValueError("Simulated error")

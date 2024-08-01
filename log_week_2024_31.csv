@@ -401,3 +401,305 @@ action_datetime,path_name,method,ip,status_response,response,description,request
 
 
 ","{'path': {}, 'query': {}}",0.001
+2024-08-01 08:43:59,/auth/login,POST,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},500: Looix asd,"
+
+
+
+{
+    ""username"":""regular_user"",
+    ""password"":""hashed_password_1""ádads
+}
+
+
+
+","{'path': {}, 'query': {}}",0.001
+2024-08-01 08:44:25,/auth/login,POST,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},502: Looix asd,"
+
+
+
+{
+    ""username"":""regular_user"",
+    ""password"":""hashed_password_1""ádads
+}
+
+
+
+","{'path': {}, 'query': {}}",0.0
+2024-08-01 08:45:12,/auth/login,POST,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},400: Looix asd,"
+
+
+
+{
+    ""username"":""regular_user"",
+    ""password"":""hashed_password_1""ádads
+}
+
+
+
+","{'path': {}, 'query': {}}",0.002
+2024-08-01 08:45:54,/hiu,GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},500: TESST token,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {}, 'query': {}}",0.001
+2024-08-01 08:46:15,/hiu,GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},500: 'NoneType' object has no attribute 'split',"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {}, 'query': {}}",0.002
+2024-08-01 08:47:00,/hiu,GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},500: 'NoneType' object has no attribute 'split',"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {}, 'query': {}}",0.001
+2024-08-01 08:47:17,/auth/login,POST,127.0.0.1,400,"{""detail"":""JSON format không hợp lệ""}",,"
+
+
+
+{
+    ""username"":""regular_user"",
+    ""password"":""hashed_password_1""ádads
+}
+
+
+
+","{'path': {}, 'query': {}}",0.001
+2024-08-01 08:47:22,/auth/login,POST,127.0.0.1,400,"{""detail"":""Looix asd""}",,"{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.002
+2024-08-01 08:48:30,/auth/login,POST,127.0.0.1,400,"{""detail"":""Looix asd""}",,"{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.001
+2024-08-01 08:50:19,/auth/login,POST,127.0.0.1,400,"{""detail"":""Looix asd""}",,"{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.003
+2024-08-01 08:59:14,/auth/login,POST,127.0.0.1,400,"{""detail"":""Looix asd""}",,"{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.004
+2024-08-01 09:03:26,/auth/login,POST,127.0.0.1,400,"{""detail"":""Looix asd""}",,"{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.003
+2024-08-01 09:04:15,/auth/login,POST,127.0.0.1,400,"{""detail"":""Looix asd""}",,"{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.003
+2024-08-01 09:04:34,/auth/login,POST,127.0.0.1,400,"{""detail"":""Looix asd""}",,"{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.006
+2024-08-01 09:05:17,/auth/login,POST,127.0.0.1,400,"{""detail"":""Looix asd""}",,"{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.005
+2024-08-01 09:05:26,/hiu,GET,127.0.0.1,200,"{""message"":""Hello World""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {}, 'query': {}}",0.001
+2024-08-01 09:05:49,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""phone"":""0987654321"",""email"":""user@example.com"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {}}",0.012
+2024-08-01 09:06:36,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""hashed_password_2"",""id"":2,""username"":""regular_user"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""email"":""user@example.com"",""phone"":""0987654321"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {}}",0.015
+2024-08-01 09:14:07,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},500: 'NoneType' object has no attribute 'split',"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {}}",0.019
+2024-08-01 09:18:28,/auth/login,POST,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},"'in <string>' requires string as left operand, not bytes","{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.006
+2024-08-01 09:19:05,/auth/login,POST,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},"'in <string>' requires string as left operand, not bytes","{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.002
+2024-08-01 09:19:45,/auth/login,POST,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},"'in <string>' requires string as left operand, not bytes","{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.003
+2024-08-01 09:19:59,/auth/login,POST,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},"'in <string>' requires string as left operand, not bytes","{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.004
+2024-08-01 09:20:06,/auth/login,POST,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},"'in <string>' requires string as left operand, not bytes","{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.002
+2024-08-01 09:20:36,/auth/login,POST,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},"'in <string>' requires string as left operand, not bytes","{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.002
+2024-08-01 09:20:55,/auth/login,POST,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},"'in <string>' requires string as left operand, not bytes","{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.003
+2024-08-01 09:21:24,/auth/login,POST,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},"'in <string>' requires string as left operand, not bytes","{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.003
+2024-08-01 09:22:07,/auth/login,POST,127.0.0.1,400,"{""detail"":""Looix asd""}",,"{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.003
+2024-08-01 09:22:26,/auth/login,POST,127.0.0.1,400,"{""detail"":""Looix asd""}",,"{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.003
+2024-08-01 09:23:24,/auth/login,POST,127.0.0.1,400,"{""detail"":""Looix asd""}",,"{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.002
+2024-08-01 09:24:27,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},500: 'NoneType' object has no attribute 'split',"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {}}",0.01
+2024-08-01 09:43:41,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},500: 'NoneType' object has no attribute 'split',"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {}}",0.013
+2024-08-01 09:44:07,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},500: 'NoneType' object has no attribute 'split',"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {}}",0.015
+2024-08-01 09:45:30,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},500: 'NoneType' object has no attribute 'split',"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {}}",0.015
+2024-08-01 09:45:42,/auth/login,POST,127.0.0.1,400,"{""detail"":""Looix asd""}",,"{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.002
+2024-08-01 09:46:03,/auth/login,POST,127.0.0.1,400,"{""detail"":""Looix asd""}",,"{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.003
+2024-08-01 09:47:37,/auth/login,POST,127.0.0.1,400,"{""detail"":""Looix asd""}",,"{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.002
+2024-08-01 09:47:46,/auth/login,POST,127.0.0.1,200,"{""access_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWd1bGFyX3VzZXIiLCJleHAiOjE3MjI0ODEzNjZ9.IEYsJ1iET0WGTs1eRtwYMa52XmDP6HWUQNbzkYfNC4Y"",""request_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWd1bGFyX3VzZXIiLCJleHAiOjE3MjMwODUyNjZ9.orexfntKIuhB0s2F9xmh94XdQW78_LE9RrWmmQyXSqo"",""token_type"":""bearer""}",,"{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.014
+2024-08-01 09:49:36,/auth/login,POST,127.0.0.1,200,"{""access_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWd1bGFyX3VzZXIiLCJleHAiOjE3MjI0ODE0NzZ9.Y0IhchUMCzNjD7vPD0Rt9oV1Tw7RQToH9GTtpYg26dI"",""request_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyZWd1bGFyX3VzZXIiLCJleHAiOjE3MjMwODUzNzZ9.izX0hHl0DrPKW73pYlmS5zyZWRK9YXT61vhcW_6QdiE"",""token_type"":""bearer""}",,"{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.015
+2024-08-01 09:49:40,/auth/login,POST,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},'bytes' object has no attribute 'encode',"
+
+
+
+{
+    ""username"":""regular_user"",
+    ""password"":""hashed_password_1""adsads
+}
+
+
+
+","{'path': {}, 'query': {}}",0.0
+2024-08-01 09:49:50,/auth/login,POST,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},'bytes' object has no attribute 'encode',"
+
+
+
+{
+    ""username"":""regular_user"",
+    ""password"":""hashed_password_1""adsads
+}
+
+
+
+","{'path': {}, 'query': {}}",0.001
+2024-08-01 09:50:08,/auth/login,POST,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},'bytes' object has no attribute 'encode',"
+
+
+
+{
+    ""username"":""regular_user"",
+    ""password"":""hashed_password_1""adsads
+}
+
+
+
+","{'path': {}, 'query': {}}",0.002
+2024-08-01 09:50:31,/auth/login,POST,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},'bytes' object has no attribute 'encode',"
+
+
+
+{
+    ""username"":""regular_user"",
+    ""password"":""hashed_password_1""adsads
+}
+
+
+
+","{'path': {}, 'query': {}}",0.001
+2024-08-01 09:50:52,/auth/login,POST,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},'bytes' object has no attribute 'encode',"
+
+
+
+{
+    ""username"":""regular_user"",
+    ""password"":""hashed_password_1""adsads
+}
+
+
+
+","{'path': {}, 'query': {}}",0.001
+2024-08-01 09:52:33,/auth/login,POST,127.0.0.1,400,"{""detail"":""JSON format không hợp lệ""}",,"
+
+
+
+{
+    ""username"":""regular_user"",
+    ""password"":""hashed_password_1""adsads
+}
+
+
+
+","{'path': {}, 'query': {}}",0.004
+2024-08-01 09:54:13,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},500: 'NoneType' object has no attribute 'split',"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {}, 'query': {}}",0.0
+2024-08-01 09:54:45,/auth/login,POST,127.0.0.1,400,"{""detail"":""JSON format không hợp lệ""}",,"
+
+
+
+{
+    ""username"":""regular_user"",
+    ""password"":""hashed_password_1""adsads
+}
+
+
+
+","{'path': {}, 'query': {}}",0.001
+2024-08-01 09:54:57,/auth/login,POST,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},"'in <string>' requires string as left operand, not bytes","{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.003
+2024-08-01 09:56:06,/auth/login,POST,127.0.0.1,400,"{""detail"":""Looix asd""}",,"{""username"": ""regular_user""}","{'path': {}, 'query': {}}",0.004
+2024-08-01 09:59:24,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},500: 'NoneType' object has no attribute 'split',"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {}, 'query': {}}",0.0
+2024-08-01 10:00:05,/auth/login,POST,127.0.0.1,400,"{""detail"":""Looix asd""}",,"{""username"": ""t3""}","{'path': {}, 'query': {}}",0.003
+2024-08-01 10:00:18,/auth/login,POST,127.0.0.1,200,"{""access_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0MyIsImV4cCI6MTcyMjQ4MjExOH0.VEUJjDEHM444dzMYUh23O0q4iaqtKLuNV9xGW-UuK5A"",""request_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0MyIsImV4cCI6MTcyMzA4NjAxOH0.vQU_EfSe0kLUv6d6poMZMxMcnpobtVrOtKA8hvALFPQ"",""token_type"":""bearer""}",,"{""username"": ""t3""}","{'path': {}, 'query': {}}",0.015
+2024-08-01 10:00:21,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},'_StreamingResponse' object has no attribute 'body',"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {}}",0.042
+2024-08-01 10:01:16,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},'_StreamingResponse' object has no attribute 'body',"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {}}",0.042
+2024-08-01 10:01:42,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},'_StreamingResponse' object has no attribute 'body',"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {}}",0.048
+2024-08-01 10:03:02,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},'_StreamingResponse' object has no attribute 'body',"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {}}",0.061
+2024-08-01 10:04:15,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},'_StreamingResponse' object has no attribute 'body',"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {}}",0.066
+2024-08-01 10:05:52,/users/{id},GET,127.0.0.1,403,"{""detail"":""Bạn không có quyền sử dụng tính năng này""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {}, 'query': {}}",0.016
+2024-08-01 10:06:07,/users/{id},GET,127.0.0.1,403,"{""detail"":""Bạn không có quyền sử dụng tính năng này""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {}, 'query': {}}",0.017
+2024-08-01 10:13:38,/users/{id},GET,127.0.0.1,403,"{""detail"":""Bạn không có quyền sử dụng tính năng này""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {}, 'query': {}}",0.018
+2024-08-01 10:13:44,/users/ádadsadsdasadsadsadssaddasadsadsasdadsdas,GET,127.0.0.1,403,"{""detail"":""Bạn không có quyền sử dụng tính năng này""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {}, 'query': {}}",0.005
+2024-08-01 10:13:52,/users/zxczxczcxzcxcxzzcxzcxcxzczxzcxzcxzcxcxcasasddddddddddddddddddddddddddddddddđ,GET,127.0.0.1,403,"{""detail"":""Bạn không có quyền sử dụng tính năng này""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {}, 'query': {}}",0.005
+2024-08-01 10:13:58,/users/{id},GET,127.0.0.1,403,"{""detail"":""Bạn không có quyền sử dụng tính năng này""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {}, 'query': {}}",0.007
+2024-08-01 10:14:05,/auth/login,POST,127.0.0.1,200,"{""access_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0MiIsImV4cCI6MTcyMjQ4Mjk0NX0.PKdgG3U-47pRfTVjB3KZIC-YHyHzkS1jc4Jd0lkmXMc"",""request_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0MiIsImV4cCI6MTcyMzA4Njg0NX0.0gk1LSQSQJYRgsToldnUVj6ZHNlEgaz-tGBmn2Z3Yhg"",""token_type"":""bearer""}",,"{""username"": ""t2""}","{'path': {}, 'query': {}}",0.006
+2024-08-01 10:14:10,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""1"",""id"":2,""username"":""t2"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""phone"":""0987654321"",""email"":""user@example.com"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {}}",0.04
+2024-08-01 10:18:47,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""1"",""id"":2,""username"":""t2"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""email"":""user@example.com"",""phone"":""0987654321"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {}}",0.046
+2024-08-01 10:18:57,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""1"",""id"":2,""username"":""t2"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""phone"":""0987654321"",""email"":""user@example.com"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {}}",0.046
+2024-08-01 10:22:15,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""1"",""id"":2,""username"":""t2"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""email"":""user@example.com"",""phone"":""0987654321"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {}}",0.047
+2024-08-01 10:24:05,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""1"",""id"":2,""username"":""t2"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""email"":""user@example.com"",""phone"":""0987654321"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {}}",0.036
+2024-08-01 10:24:36,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""1"",""id"":2,""username"":""t2"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""phone"":""0987654321"",""email"":""user@example.com"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {}}",0.048
+2024-08-01 10:25:55,/users/{id},GET,127.0.0.1,200,"{""email"":""user@example.com"",""phone"":""0987654321"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438"",""hash_password"":""1"",""id"":2,""username"":""t2"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {}}",0.05
+2024-08-01 10:29:04,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""1"",""id"":2,""username"":""t2"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""email"":""user@example.com"",""phone"":""0987654321"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {}}",0.045
+2024-08-01 10:31:29,/auth/login,POST,127.0.0.1,200,"{""access_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0MiIsImV4cCI6MTcyMjQ4Mzk4OX0.VM28oHVxMuUIxxBUmnvLgkdb0n-EOHVn1eDvC1iee90"",""request_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0MiIsImV4cCI6MTcyMzA4Nzg4OX0.K1mbH2ps6eFAH42SKDxx6JyxNEguWu91bZ7q44iJU_w"",""token_type"":""bearer""}",,"{""username"": ""t2""}","{'path': {}, 'query': {}}",0.015
+2024-08-01 10:31:32,/users/{id},GET,127.0.0.1,200,"{""hash_password"":""1"",""id"":2,""username"":""t2"",""full_name"":""Regular User"",""created_at"":""2024-07-30T21:58:26.956438"",""created_by"":1,""updated_by"":1,""phone"":""0987654321"",""email"":""user@example.com"",""status"":1,""updated_at"":""2024-07-30T21:58:26.956438""}",,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {}}",0.033
+2024-08-01 10:34:36,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},"""500: 401: invalidate token""","{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {}, 'query': {}}",0.0
+2024-08-01 10:37:29,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},"""500: 401: invalidate token""","{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {}, 'query': {}}",0.0
