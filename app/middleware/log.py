@@ -196,7 +196,7 @@ class LoggingMiddleware(BaseHTTPMiddleware):
             self.print_log_request(request=request, request_body=request_body, original_path=original_path, start_time=start_time)
             
             print("body:", body_str)
-            write log to csv and db
+            #write log to csv and db
             await self.write_log(db=db, request=request, request_body=request_body, 
                 original_path=original_path, status_code=response.status_code,
                 body_str=body_str, process_time=process_time, error_message=error_message)
