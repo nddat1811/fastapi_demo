@@ -82,11 +82,12 @@ class LoggingMiddleware(BaseHTTPMiddleware):
 
         return request.client.host
 
-    def print_log_response(self, status_code, response):
+    def print_log_response(self, status_code, response, error_message):
         logger.info(
             f"\n RESPONSE \n"
             f"Status code: {status_code}\n"
             f"Response: {response}\n"
+            f"Error message: {error_message}\n"
             )
     async def dispatch(self, request: Request, call_next):
         flag = True
@@ -96,11 +97,15 @@ class LoggingMiddleware(BaseHTTPMiddleware):
         response = await call_next(request)
         process_time = time.time() - start_time
         error_message = None
+        body_str = str("")
         try:
             original_path = self.get_original_path(request.scope.get('route'))
+            #print log to screen
+            self.print_log_request(request=request, request_body=request_body, original_path=original_path)
             # if base64, file, OPTIONS method, some urls --> not write log --> return response 
             if not await check_authentication(request=request, db=db, original_path=original_path):
                 flag = False
+                print("zo nay ???")
                 response = JSONResponse(
                         status_code=status.HTTP_403_FORBIDDEN,
                         content={"detail": "Bạn không có quyền sử dụng tính năng này"}
@@ -121,7 +126,7 @@ class LoggingMiddleware(BaseHTTPMiddleware):
                         status_code=status.HTTP_400_BAD_REQUEST,
                         content={"detail": "JSON format không hợp lệ"}
                     )
-            body_str = str("")
+            
             if flag:
                 body_iterator = response.body_iterator
                 body = b"".join([section async for section in body_iterator])
@@ -129,19 +134,28 @@ class LoggingMiddleware(BaseHTTPMiddleware):
                 response = Response(content=body_str, status_code=response.status_code, headers=dict(response.headers))
             else:
                 body_str = response.body.decode('utf-8', errors='replace')
-            #print log to screen
-            self.print_log_request(request=request, request_body=request_body, original_path=original_path)
         except Exception as e:
             error_message = str(e)
-            body_str=str({"detail": "Lỗi hệ thống"})
+            # print("ttt: ", error_message)
+            body_str=error_message
             response =  JSONResponse(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                content={"detail": "Lỗi hệ thống"}
+                content=error_message
             )
         finally:
+            # print("errr: ", response.status_code)
+            if response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
+                error_message = body_str
+                body_str=str({"detail": "Lỗi hệ thống"})
+                response =  JSONResponse(
+                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    content={"detail": "Lỗi hệ thống"}
+                )
+
+            # print("body:", body_str)
             # write log to csv and db
             await self.write_log(db=db, request=request, request_body=request_body, 
                 original_path=original_path, status_code=response.status_code,
                 body_str=body_str, process_time=process_time, error_message=error_message)
-            self.print_log_response(status_code=response.status_code, response=body_str)
+            #self.print_log_response(status_code=response.status_code, response=body_str, error_message=error_message)
             return response

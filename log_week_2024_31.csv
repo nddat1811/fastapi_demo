@@ -245,3 +245,112 @@ action_datetime,path_name,method,ip,status_response,response,description,request
     ""test"":""oik"",
     ""t1"":""123sadads""
 }","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.014
+2024-07-31 21:56:33,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},401: TESST token,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.011
+2024-07-31 21:56:56,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},401: TESST token,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.009
+2024-07-31 21:58:37,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},401: TESST token,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.013
+2024-07-31 21:59:28,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},401: TESST token,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.013
+2024-07-31 22:00:07,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},401: TESST token,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.013
+2024-07-31 22:03:06,/auth/login,POST,127.0.0.1,400,"{""detail"":""JSON format không hợp lệ""}",,"{
+    ""username"":""string"",
+}
+
+
+
+
+
+
+
+","{'path': {}, 'query': {}}",0.001
+2024-07-31 22:03:13,/auth/login,POST,127.0.0.1,422,"{""detail"":[{""type"":""missing"",""loc"":[""body"",""password""],""msg"":""Field required"",""input"":{""username"":""string""}}]}",,"{""username"": ""string""}","{'path': {}, 'query': {}}",0.003
+2024-07-31 22:05:12,/auth/login,POST,127.0.0.1,400,"{""detail"":""JSON format không hợp lệ""}",,"{
+    ""username"":""string"",
+    ""password"":""string""ádasd
+}
+
+
+
+
+
+
+
+","{'path': {}, 'query': {}}",0.001
+2024-07-31 22:05:17,/auth/login,POST,127.0.0.1,401,"{""detail"":""Test xem thu""}",,"{""username"": ""string""}","{'path': {}, 'query': {}}",0.002
+2024-07-31 22:05:35,/auth/login,POST,127.0.0.1,204,,,"{""username"": ""string""}","{'path': {}, 'query': {}}",0.002
+2024-07-31 22:07:28,/auth/login,POST,127.0.0.1,411,"{""detail"":""Test xem thu""}",,"{""username"": ""string""}","{'path': {}, 'query': {}}",0.003
+2024-07-31 22:09:31,/auth/login,POST,127.0.0.1,500,"{""detail"":""An error occurred: Simulated error""}",,"{""username"": ""string""}","{'path': {}, 'query': {}}",0.002
+2024-07-31 22:11:51,/auth/login,POST,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},"{""detail"":""An error occurred: Simulated error""}","{""username"": ""string""}","{'path': {}, 'query': {}}",0.003
+2024-07-31 22:12:17,/auth/login,POST,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},"{""detail"":""An error occurred: Simulated error""}","{""username"": ""string""}","{'path': {}, 'query': {}}",0.002
+2024-07-31 22:13:15,/auth/login,POST,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},"{""detail"":""An error occurred: Simulated error""}","{""username"": ""string""}","{'path': {}, 'query': {}}",0.003
+2024-08-01 08:12:36,/auth/login,POST,127.0.0.1,503,"{""detail"":""An error occurred: Simulated error""}",,"{""username"": ""string""}","{'path': {}, 'query': {}}",0.002
+2024-08-01 08:13:26,/auth/login,POST,127.0.0.1,503,"{""detail"":""Looix asd""}",,"{""username"": ""string""}","{'path': {}, 'query': {}}",0.003
+2024-08-01 08:15:45,/auth/login,POST,127.0.0.1,200,"{""access_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE3MjI0NzU4NDV9.na0HJTd9shXL2mA75eUmOW4G_di3JeFQUMJBdLgicj0"",""request_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE3MjMwNzk3NDV9.gg1oaCcFsj_ZFUVuWNNu3RrdpyLxnNHxP-O2IPUtmws"",""token_type"":""bearer""}",,"{""username"": ""string""}","{'path': {}, 'query': {}}",0.02
+2024-08-01 08:16:01,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.007
+2024-08-01 08:16:56,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.014
+2024-08-01 08:17:50,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.015
+2024-08-01 08:18:36,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.016
+2024-08-01 08:19:06,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.014
+2024-08-01 08:19:37,/users/{id},GET,127.0.0.1,200,,401: TESST token,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.013
+2024-08-01 08:21:13,/users/{id},GET,127.0.0.1,200,,500: TESST token,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.064
+2024-08-01 08:21:39,/users/{id},GET,127.0.0.1,200,,500: TESST token,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.017
+2024-08-01 08:21:56,/users/{id},GET,127.0.0.1,200,,500: TESST token,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.013
+2024-08-01 08:22:46,/users/{id},GET,127.0.0.1,200,,500: TESST token,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.011
+2024-08-01 08:23:46,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.012
+2024-08-01 08:24:55,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.016
+2024-08-01 08:27:10,/users/{id},GET,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},500: TESST token,"{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {'id': '2'}, 'query': {'test': '2', 't': '3'}}",0.014
+2024-08-01 08:28:32,/auth/login,POST,127.0.0.1,200,"{""access_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE3MjI0NzY2MTJ9.rTGWrY7fMOC36YYTWJVFyWsCGyIPIF6siJhFRL3HaiM"",""request_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE3MjMwODA1MTJ9.eH4Vj62IjlZDswewo4h0O4qQ-R1eBX3nZAIllzl-Qfs"",""token_type"":""bearer""}",,"{""username"": ""string""}","{'path': {}, 'query': {}}",0.011
+2024-08-01 08:29:45,/auth/login,POST,127.0.0.1,503,"{""detail"":""Looix asd""}",,"{""username"": ""string""}","{'path': {}, 'query': {}}",0.002
+2024-08-01 08:30:07,/auth/login,POST,127.0.0.1,500,{'detail': 'Lỗi hệ thống'},"{""detail"":""Looix asd""}","{""username"": ""string""}","{'path': {}, 'query': {}}",0.002

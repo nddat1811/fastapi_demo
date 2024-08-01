@@ -35,33 +35,43 @@ async def is_email_non_exist(email: str, db : Session) -> bool:
     user = db.query(SysUser).filter(SysUser.email == email).first()
     return user is None
 
-async def login(request : OAuth2PasswordRequestForm, db: Session) -> AuthResponse:
-    user = await get_user_by_username(request.username, db)
-
-    if user is None:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="user not found"
+async def login(request: OAuth2PasswordRequestForm, db: Session) -> AuthResponse:
+    raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Looix asd"
         )
 
-    # if not hash.Hash.verify(request.password, user.hashed_password):
-    #     raise HTTPException(
-    #         status_code=status.HTTP_401_UNAUTHORIZED,
-    #         detail="invalid user"
-    #     )
-    
-    claims = {'sub' : user.username}
-    access_token = oauth2.create_token(claims)
-    refresh_token = oauth2.create_token(claims, timedelta(weeks=1))
+    try:
+        # Simulate an error to always trigger the except block
+        # raise ValueError("Simulated error")
 
-    user.refresh_token = refresh_token
-    db.commit()
+        user = await get_user_by_username(request.username, db)
 
-    return AuthResponse(
-        access_token = access_token,
-        request_token = refresh_token,
-        token_type = 'bearer'
-    )
+        if user is None:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="user not found"
+            )
+
+        # if not hash.Hash.verify(request.password, user.hashed_password):
+
+        claims = {'sub': user.username}
+        access_token = oauth2.create_token(claims)
+        refresh_token = oauth2.create_token(claims, timedelta(weeks=1))
+
+        user.refresh_token = refresh_token
+        db.commit()
+
+        return AuthResponse(
+            access_token=access_token,
+            request_token=refresh_token,
+            token_type='bearer'
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=f"An error occurred: {str(e)}"
+        )
 
 async def refresh_token(token : str, db: Session) -> AuthResponse:
     username = oauth2.extract_claim(claim_type = 'sub', token=token)
