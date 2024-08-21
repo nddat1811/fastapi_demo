@@ -10,7 +10,7 @@ def get_week_number(date):
 def get_csv_filename(date):
     week_number = get_week_number(date)
     year = date.year
-    return os.path.join("app/logs", f"log_week_{year}_{week_number}.csv")
+    return os.path.join("logs", f"log_week_{year}_{week_number}.csv")
 
 def write_log_csv(req: LogModel):
     today = datetime.now()

@@ -1,0 +1,36 @@
+action_datetime,path_name,method,ip,status_response,response,description,request_body,request_query,duration
+2024-08-01 14:32:54,/auth/login,POST,172.31.98.133,200,"{""access_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0MyIsImV4cCI6MTcyMjQ5ODQ3NH0._1hdKrUVGtsbVJlZ6ZEgCp64fdWpQLeIH7AaLLjh3aM"",""request_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0MyIsImV4cCI6MTcyMzEwMjM3NH0.SLHHqQmFnmtmMbdroRWfzAxlMGoaOyyrugbfLq532yU"",""token_type"":""bearer""}",,"{""username"": ""t3""}","{'path': {}, 'query': {}}",0.016
+2024-08-01 16:45:25,/users/{id},GET,10.151.99.17,500,{'detail': 'Lỗi hệ thống'},"""500: 401: invalidate token""","{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {}, 'query': {}}",0.0
+2024-08-01 16:47:53,/users/{id},GET,10.151.99.17,500,{'detail': 'Lỗi hệ thống'},"""500: 401: invalidate token""","{
+    ""test"":""oik"",
+    ""t1"":""123sadads""
+}","{'path': {}, 'query': {}}",0.0
+2024-08-01 16:47:55,/golf/auth/login,POST,172.17.0.1,500,{'detail': 'Lỗi hệ thống'},"""500: 'NoneType' object has no attribute 'split'""","{
+    ""username"":""t1"",
+    ""password"":""1""
+}","{'path': {}, 'query': {}}",0.0
+2024-08-01 16:48:07,/golf/auth/login,POST,172.17.0.1,500,{'detail': 'Lỗi hệ thống'},"""500: 'NoneType' object has no attribute 'split'""","{
+    ""username"":""t1"",
+    ""password"":""1""
+}","{'path': {}, 'query': {}}",0.0
+2024-08-01 16:48:35,/auth/login,POST,172.17.0.1,200,"{""access_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0MSIsImV4cCI6MTcyMjUwNjYxNX0.lAye-sXJ5_Ge8BVl2FUi59SLLgeVhFWtgWF67tylcUA"",""request_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0MSIsImV4cCI6MTcyMzExMDUxNX0.j0sUlrb1ICq6j-Q7fS3gLNTQw0KFyj29tDMLMrhu0oo"",""token_type"":""bearer""}",,"{""username"": ""t1""}","{'path': {}, 'query': {}}",0.009
+2024-08-01 16:50:20,/g/auth/login,POST,172.17.0.1,500,{'detail': 'Lỗi hệ thống'},"""500: 'NoneType' object has no attribute 'split'""","{
+    ""username"":""t1"",
+    ""password"":""1""
+}","{'path': {}, 'query': {}}",0.0
+2024-08-01 16:51:15,/g/auth/login,POST,172.17.0.1,500,{'detail': 'Lỗi hệ thống'},"""500: 'NoneType' object has no attribute 'split'""","{
+    ""username"":""t1"",
+    ""password"":""1""
+}","{'path': {}, 'query': {}}",0.0
+2024-08-01 16:52:23,/g/auth/login,POST,10.151.99.17,500,{'detail': 'Lỗi hệ thống'},"""500: 'NoneType' object has no attribute 'split'""","{
+    ""username"":""t1"",
+    ""password"":""1""
+}","{'path': {}, 'query': {}}",0.0
+2024-08-01 16:55:56,/g/auth/login,POST,10.151.99.17,500,{'detail': 'Lỗi hệ thống'},"""500: 'NoneType' object has no attribute 'split'""","{
+    ""username"":""t1"",
+    ""password"":""1""
+}","{'path': {}, 'query': {}}",0.0
+2024-08-01 17:02:13,/auth/login,POST,127.0.0.1,200,"{""access_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0MyIsImV4cCI6MTcyMjUwNzQzM30.DRm79N3HlNlS4f_h1w5V2t57Q82SJCoKD3fnE0dEj5w"",""request_token"":""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0MyIsImV4cCI6MTcyMzExMTMzM30.LmgSwJo2HL3EB2v992CV7P2OAiOJ0Rr-jax2oeF7z-o"",""token_type"":""bearer""}",,"{""username"": ""t3""}","{'path': {}, 'query': {}}",0.013

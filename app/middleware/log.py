@@ -77,11 +77,13 @@ class LoggingMiddleware(BaseHTTPMiddleware):
             "X-Forwarded-For",
             "X-Real-IP"
         ]
-
+        print("host: ", request.client.host)
         for header in headers_to_check:
             if header in request.headers:
-                return request.headers[header].split(",")[0].strip()
-
+                print("host2: ", request.headers[header])
+                #return request.headers[header].split(",")[0].strip()
+        client_ip = request.headers.get("X-Forwarded-For")
+        print("client_ip: ", request.headers)
         return request.client.host
 
     def print_log_response(self, status_code, response, error_message):
@@ -95,14 +97,14 @@ class LoggingMiddleware(BaseHTTPMiddleware):
     async def handle_write_log(
         self, response, error_message, request, request_body, original_path, start_time, process_time, body_str, db
     ):
-        self.print_log_request(request=request, request_body=request_body, original_path=original_path, start_time=start_time)
+        #self.print_log_request(request=request, request_body=request_body, original_path=original_path, start_time=start_time)
             
         # print("body:", body_str)
         # write log to csv and db
         self.write_log(db=db, request=request, request_body=request_body, 
                 original_path=original_path, status_code=response.status_code,
                 body_str=body_str, process_time=process_time, error_message=error_message)
-        self.print_log_response(status_code=response.status_code, response=body_str[:LENGTH_RESPONSE], error_message=error_message)
+        #self.print_log_response(status_code=response.status_code, response=body_str[:LENGTH_RESPONSE], error_message=error_message)
     async def test(self, flag, response, error_message, request, request_body, original_path, start_time, process_time, db, background_tasks: BackgroundTasks):
         background_tasks.add_task(await self.handle_write_log, flag, response, 
                 error_message, request, request_body, original_path, start_time, process_time, db)

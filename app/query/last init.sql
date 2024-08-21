@@ -94,3 +94,17 @@ CREATE TABLE "DATA_DICTIONARY" (
     description VARCHAR(255),
     value INT  -- enum for each column name
 );
+
+CREATE TABLE "GROUP" (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    bio TEXT,
+    image_url VARCHAR(255),
+    total_members INTEGER,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_by INTEGER,
+    updated_by INTEGER,
+    approved_by INTEGER,
+    approved_at TIMESTAMP
+);

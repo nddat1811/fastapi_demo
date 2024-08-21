@@ -2,14 +2,13 @@ from app.middleware.log import LoggingMiddleware
 # from db import database
 from app.auth import authentication
 
-from app.db.db_function import is_authentication
-from app.models.user import SysUser
+
 from app.routers import user
 from app.db.database import engine, get_db
 from app import models
 from app.routers import user
 
-from fastapi import APIRouter, Depends, HTTPException, Request, status, FastAPI
+from fastapi import FastAPI
 
 app = FastAPI()
 app.include_router(user.router)
